@@ -4,12 +4,12 @@ import { getMenus } from '@/api/menus'
 import Layout from '@/layout/Layout'
 
 interface HomeProps {
-  menus: Menu[]
+  menus: CommonData<Menu>[]
 }
 
-const Home: NextPage<HomeProps> = () => {
+const Home: NextPage<HomeProps> = ({ menus }) => {
   return (
-    <Layout>
+    <Layout menus={menus} activeId={1}>
       <Seo />
     </Layout>
   )

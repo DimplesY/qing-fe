@@ -15,5 +15,23 @@
 }
 
 .logo {
-  @apply w-[107px] h-[22px];
+  @apply w-[107px] h-[22px] hidden sm:block ml-[24px] mr-4;
+}
+
+.logoMobile {
+  @apply w-[31px] h-[24px] block sm:hidden;
+}
+
+.menuItem {
+  position: relative;
+  &:hover::before {
+    content: '';
+    position: absolute;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background-color: #007fff;
+  }
 }
