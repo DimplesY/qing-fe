@@ -1,3 +1,4 @@
+// 导航栏菜单
 interface Menu {
   name: string
   path: string

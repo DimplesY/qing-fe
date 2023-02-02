@@ -10,7 +10,7 @@ interface CommonData<T> {
   attributes: T
 }
 
-interface CommResponse<T> {
+interface CommResponse<T = unknown> {
   data: CommonData<T>[]
   meta: Pagination
 }
