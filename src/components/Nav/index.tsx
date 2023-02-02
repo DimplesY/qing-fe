@@ -4,6 +4,7 @@ import clsxm from '@/utils/clsxm'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
+import Badge from '../Badge'
 import styles from './index.module.scss'
 
 interface NavProps {
@@ -17,13 +18,14 @@ const DesktopNav: FC<NavProps> = ({ menus, activeId }) => (
     {menus.map((menu) => (
       <li
         className={clsxm(
-          'h-full mx-4 leading-[5rem] text-[var(--juejin-font-2)]',
+          'h-full mx-4 leading-[5rem] text-[var(--juejin-font-2)] block',
           activeId === menu.id && 'text-[#1e80ff] font-[500] hover:text-black',
           activeId !== menu.id && 'hover:text-black',
           styles.menuItem,
         )}
         key={menu.id}>
-        <Link href={menu.attributes.path}>{menu.attributes.name}</Link>
+        {!!menu.attributes.badge?.trim() && <Badge title={menu.attributes.badge} />}
+        <Link href={menu.attributes.path}>{menu.attributes.name} </Link>
       </li>
     ))}
   </ul>
