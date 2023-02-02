@@ -1,11 +1,11 @@
-import axios from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
 import type { InternalAxiosRequestConfig, AxiosError, AxiosResponse } from 'axios'
 
-const request = axios.create({
+const instance = axios.create({
   baseURL: process.env.API_URL,
 })
 
-request.interceptors.request.use(
+instance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     return config
   },
@@ -14,7 +14,7 @@ request.interceptors.request.use(
   },
 )
 
-request.interceptors.response.use(
+instance.interceptors.response.use(
   (response: AxiosResponse) => {
     return response.data
   },
@@ -23,4 +23,6 @@ request.interceptors.response.use(
   },
 )
 
-export default request
+export function request<T>(config: AxiosRequestConfig): Promise<T> {
+  return request(config)
+}

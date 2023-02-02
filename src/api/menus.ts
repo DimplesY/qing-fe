@@ -1,7 +1,7 @@
-import request from '@/utils/request'
+import { request } from '@/utils/request'
 
-export function getMenus(): Promise<CommResponse<Menu[]>> {
-  return request({
+export function getMenus() {
+  return request<CommResponse<Menu[]>>({
     url: '/menus',
     method: 'GET',
   })
