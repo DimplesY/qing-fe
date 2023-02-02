@@ -1,6 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import Seo from '@/components/Seo'
 import { getMenus } from '@/api/menus'
+import Layout from '@/layout/Layout'
 
 interface HomeProps {
   menus: Menu[]
@@ -8,9 +9,9 @@ interface HomeProps {
 
 const Home: NextPage<HomeProps> = () => {
   return (
-    <>
+    <Layout>
       <Seo />
-    </>
+    </Layout>
   )
 }
 

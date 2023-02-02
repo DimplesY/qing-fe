@@ -1,8 +1,12 @@
 {
   "cSpell.words": [
+    "clsxm",
     "commitlint",
     "objectstyles",
     "tailwindcss",
     "xwind"
-  ]
+  ],
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false
 }

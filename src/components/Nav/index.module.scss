@@ -1,0 +1,19 @@
+.header {
+  @apply border-b border-solid border-[#f1f1f1] w-full bg-[var(--primary-white)] fixed top-0 left-0 transition-all duration-200;
+}
+
+.nav {
+  @apply box-content h-20 w-full mx-auto lg:w-[1440px]  flex items-center;
+}
+
+.show {
+  @apply translate-y-0;
+}
+
+.visible {
+  @apply -translate-y-full;
+}
+
+.logo {
+  @apply w-[107px] h-[22px];
+}

@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-white: #fff;
+}
+
+html.dark {
+  --primary-white: #1a202c;
+}
+
+html {
+  font-size: 12px;
+  background-color: #f4f5f5;
+}
+
+body {
+  min-height: 200vh;
+}
