@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { InternalAxiosRequestConfig, AxiosError } from 'axios'
+import type { InternalAxiosRequestConfig, AxiosError, AxiosResponse } from 'axios'
 
 const request = axios.create({
   baseURL: process.env.API_URL,
@@ -15,7 +15,7 @@ request.interceptors.request.use(
 )
 
 request.interceptors.response.use(
-  (response) => {
+  (response: AxiosResponse) => {
     return response.data
   },
   (err: AxiosError) => {
