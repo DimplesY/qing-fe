@@ -1,3 +1,4 @@
+import useDevice from '@/hooks/useDevice'
 import { useShowHeader } from '@/hooks/useShowHeader'
 import clsxm from '@/utils/clsxm'
 import Image from 'next/image'
@@ -10,8 +11,27 @@ interface NavProps {
   activeId: number
 }
 
-const Nav: FC<NavProps> = ({ menus, activeId }) => {
+// PC 端导航条
+const DesktopNav: FC<NavProps> = ({ menus, activeId }) => (
+  <ul className="flex h-full text-[1.167rem]">
+    {menus.map((menu) => (
+      <li
+        className={clsxm(
+          'h-full mx-4 leading-[5rem] text-[var(--juejin-font-2)]',
+          activeId === menu.id && 'text-[#1e80ff] font-[500] hover:text-black',
+          activeId !== menu.id && 'hover:text-black',
+          styles.menuItem,
+        )}
+        key={menu.id}>
+        <Link href={menu.attributes.path}>{menu.attributes.name}</Link>
+      </li>
+    ))}
+  </ul>
+)
+
+const Nav: FC<NavProps> = (props) => {
   const show = useShowHeader()
+  const { isDesktop } = useDevice()
 
   return (
     <header className={clsxm(styles.header, show ? styles.visible : styles.show)}>
@@ -35,20 +55,8 @@ const Nav: FC<NavProps> = ({ menus, activeId }) => {
           className={styles.logoMobile}
         />
 
-        <ul className="flex h-full text-[1.167rem]">
-          {menus.map((menu) => (
-            <li
-              className={clsxm(
-                'h-full mx-4 leading-[5rem] text-[var(--juejin-font-2)]',
-                activeId === menu.id && 'text-[#1e80ff] font-[500] hover:text-black',
-                activeId !== menu.id && 'hover:text-black',
-                styles.menuItem,
-              )}
-              key={menu.id}>
-              <Link href={menu.attributes.path}>{menu.attributes.name}</Link>
-            </li>
-          ))}
-        </ul>
+        {/* PC端导航条 */}
+        {isDesktop() && <DesktopNav {...props} />}
       </nav>
     </header>
   )
