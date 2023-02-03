@@ -25,7 +25,7 @@ const Tabs: FC = () => {
     <div
       className={clsxm(
         'h-[3.833rem] leading-[3rem] pt-[0.6rem] box-content sm:pt-0 w-full bg-[var(--primary-white)] fixed shadow-tabs transition-all duration-200',
-        show ? '-translate-y-[calc(5rem+1px)]' : '',
+        show ? '-translate-y-[calc(4.33rem+1px)] sm:-translate-y-[calc(5rem+1px)]' : '',
       )}>
       <div className="flex items-center justify-start h-full max-w-full sm:max-w-[960px] mx-auto overflow-x-scroll">
         <ul className="flex h-full text-[1.16rem] text-[var(--tabs-color)]">
