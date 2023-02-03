@@ -15,4 +15,5 @@ module.exports = {
       'mobile-menu': '0 8px 24px rgb(81 87 103 / 16%)',
     },
   },
+  plugins: [require('tailwind-scrollbar')],
 }
