@@ -17,10 +17,10 @@ const Home: NextPage<HomeProps> = ({ menus }) => {
       <Tabs />
       <Main className="flex justify-between mt-[16px]">
         {/* 文章列表 */}
-        <div className="w-[700px] bg-white"></div>
+        <div className="w-[700px] bg-[var(--primary-white)]"></div>
 
         {/* 广告栏 */}
-        <div className="">
+        <div className="hidden sm:block">
           <AdvImage
             img="/advImage1.jpg"
             adLink="/"
