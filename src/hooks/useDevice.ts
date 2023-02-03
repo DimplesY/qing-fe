@@ -24,6 +24,7 @@ export default function useDevice() {
   const { run } = useThrottleFn(onResize, { wait: 300 })
 
   useEffect(() => {
+    run()
     window.addEventListener('resize', run)
     return () => {
       window.removeEventListener('resize', run)

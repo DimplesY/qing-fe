@@ -3,7 +3,7 @@
 }
 
 .nav {
-  @apply box-content h-20 w-full mx-auto lg:w-[1440px]  flex items-center;
+  @apply box-content h-[4.33rem] sm:h-20 w-full mx-auto lg:w-[1440px]  flex items-center;
 }
 
 .show {
@@ -19,7 +19,7 @@
 }
 
 .logoMobile {
-  @apply w-[31px] h-[24px] block sm:hidden;
+  @apply w-[31px] h-[24px] block sm:hidden ml-[1.3333rem];
 }
 
 .menuItem {

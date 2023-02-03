@@ -10,4 +10,9 @@ module.exports = {
       primary: ['Inter', ...fontFamily.sans],
     },
   },
+  theme: {
+    boxShadow: {
+      'mobile-menu': '0 8px 24px rgb(81 87 103 / 16%)',
+    },
+  },
 }
