@@ -41,7 +41,7 @@ const MobileNav: FC<NavProps> = ({ menus, activeId }) => {
 
       <ul
         className={clsxm(
-          'w-[11.9rem] p-[0.667rem] box-content shadow-mobile-menu dark:shadow-slate-600 text-[1.2rem] block absolute -right-20 -left-[4.3rem] top-[52px] border-solid border rounded-[4px] border-[#ebebeb] dark:border-zinc-600 bg-[var(--primary-white)]',
+          'w-[11.9rem] p-[0.667rem] box-content shadow-mobile-menu dark:shadow-slate-600 text-[1.2rem] block absolute -right-20 -left-[4.3rem] z-[9999] top-[52px] border-solid border rounded-[4px] border-[#ebebeb] dark:border-zinc-600 bg-[var(--primary-white)]',
           showMenu && 'block',
           !showMenu && 'hidden',
         )}>
