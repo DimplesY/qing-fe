@@ -65,7 +65,7 @@ const MobileNav: FC<NavProps> = ({ menus, activeId }) => {
 
 // PC 端导航条
 const DesktopNav: FC<NavProps> = ({ menus, activeId }) => (
-  <ul className="flex flex-1 h-full text-[1.167rem] max-w-[1000px] overflow-x-scroll scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100">
+  <ul className="flex flex-1 h-full text-[1.167rem] max-w-[1000px] overflow-x-scroll scrollbar">
     {menus.map((menu) => (
       <li
         className={clsxm(
