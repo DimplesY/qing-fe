@@ -1,29 +1,33 @@
-import { FC } from 'react'
+import { ComponentPropsWithoutRef, FC } from 'react'
 import Image from 'next/image'
-import styles from './index.module.scss'
-interface AdvProps {
+import Link from 'next/link'
+import clsxm from '@/utils/clsxm'
+
+type AdvImageProps = ComponentPropsWithoutRef<'div'> & {
+  /** 图片路径 */
   img: string
+  /** 图片链接 */
   link: string
+  /** 图片描述 */
   alt: string
+  /** 广告投放链接 */
+  adLink: string
 }
 
-// todo: 广告组件
-const Adv: FC<AdvProps> = () => {
+// 图片广告组件
+export const AdvImage: FC<AdvImageProps> = ({ className, img, link, adLink, alt, ...rest }) => {
   return (
-    <div className="w-[240px] bg-transparent">
-      <Image src="/advImage1.jpg" priority width={240} height={200} alt="广告" />
+    <div className={clsxm(className, 'relative')} {...rest}>
+      <Link href={link} className="w-full h-full block">
+        <Image src={img} priority width={240} height={200} alt={alt} className="h-full w-full" />
+      </Link>
 
-      <div className={styles.advInfo}>
-        <Image src="/qrCode.png" priority width={50} height={50} alt="二维码" />
-        <div className="ml-[16px] ">
-          <div className="text-[14px] font-[500]">下载稀土掘金APP</div>
-          <div className="mt-[6px] text-[12px] text-[#86909C] font-[300]">
-            一个帮助开发者成长的社区
-          </div>
-        </div>
+      <div className="px-[15px] leading-[36px] box-content rounded-[6px] border border-white border-solid text-[20px] text-white absolute bottom-[10px] right-[10px] font-[300] bg-[rgba(0,0,0,.2)] hover:bg-[rgba(0,0,0,.4)] scale-50 origin-bottom-right group">
+        <Link href={adLink} className="flex">
+          <span className="hidden group-hover:block">投放</span>
+          <span>广告</span>
+        </Link>
       </div>
     </div>
   )
 }
-
-export default Adv
