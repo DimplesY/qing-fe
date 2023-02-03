@@ -1,12 +1,10 @@
 {
-  "cSpell.words": [
-    "clsxm",
-    "commitlint",
-    "juejin",
-    "objectstyles",
-    "tailwindcss",
-    "xwind"
-  ],
+  "cSpell.words": ["clsxm", "commitlint", "juejin", "objectstyles", "tailwindcss", "xwind"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.fixAll.eslint": true,
+    "source.organizeImports": false
+  },
   "css.validate": false,
   "less.validate": false,
   "scss.validate": false

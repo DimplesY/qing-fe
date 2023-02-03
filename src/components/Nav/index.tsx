@@ -10,6 +10,8 @@ import styles from './index.module.scss'
 import { BiCaretDown } from 'react-icons/bi'
 import { useClickAway } from 'ahooks'
 import { useTheme } from 'next-themes'
+import useLoaded from '@/hooks/useLoaded'
+
 interface NavProps {
   menus: CommonData<Menu>[]
   activeId: number
@@ -87,9 +89,9 @@ const Nav: FC<NavProps> = (props) => {
   const show = useShowHeader()
   const { isDesktop, isMobile } = useDevice()
   const { theme } = useTheme()
-
+  const isLoaded = useLoaded()
   const isDark = (): boolean => {
-    return theme === 'dark'
+    return theme === 'dark' && isLoaded
   }
 
   return (
