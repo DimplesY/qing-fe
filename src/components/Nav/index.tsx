@@ -52,7 +52,7 @@ const MobileNav: FC<NavProps> = ({ menus, activeId }) => {
                 activeId === menu.id &&
                   'font-[500] text-[#1e80ff] hover:text-black dark:hover:text-white',
                 activeId !== menu.id && 'hover:text-black dark:hover:text-white',
-                // styles.menuItem,
+                styles.menuItem,
               )}>
               {menu.attributes.name}
             </Link>
