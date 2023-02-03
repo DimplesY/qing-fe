@@ -4,11 +4,17 @@
 
 :root {
   --primary-white: #fff;
+  --tabs-color: #71777c;
+  --menu-split-line-color: #f1f1f1;
+  --tabs-active-color: #007fff;
   --juejin-font-2: #515767;
 }
 
 html.dark {
   --primary-white: #1a202c;
+  --tabs-color: #a0aec0;
+  --menu-split-line-color: #2d3748;
+  --tabs-active-color: #63b3ed;
   --juejin-font-2: #a0aec0;
 }
 

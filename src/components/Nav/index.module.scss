@@ -1,5 +1,5 @@
 .header {
-  @apply border-b border-solid border-[#f1f1f1] w-full bg-[var(--primary-white)] fixed top-0 left-0 transition-all duration-200;
+  @apply border-b border-solid border-[var(--menu-split-line-color)] w-full bg-[var(--primary-white)] fixed top-0 left-0 transition-all duration-200;
 }
 
 .nav {

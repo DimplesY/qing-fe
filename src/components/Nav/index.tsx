@@ -31,7 +31,7 @@ const MobileNav: FC<NavProps> = ({ menus, activeId }) => {
   }, ref)
 
   return (
-    <div className="relative h-full flex flex-1" ref={ref}>
+    <div className="relative h-full flex flex-1 select-none" ref={ref}>
       <div className=" cursor-pointer relative z-9" onClick={() => setShowMenu(!showMenu)}>
         <div className="w-[5.66rem] flex justify-center items-center h-full text-[1.33rem] text-[#1e80ff]">
           {activeMenu?.attributes.name}
@@ -41,7 +41,7 @@ const MobileNav: FC<NavProps> = ({ menus, activeId }) => {
 
       <ul
         className={clsxm(
-          'w-[11.9rem] p-[0.667rem] box-content shadow-mobile-menu text-[1.2rem] block absolute -right-20 -left-[4.3rem] top-[52px] border-solid border rounded-[4px] border-[#ebebeb] bg-[var(--primary-white)]',
+          'w-[11.9rem] p-[0.667rem] box-content shadow-mobile-menu dark:shadow-slate-600 text-[1.2rem] block absolute -right-20 -left-[4.3rem] top-[52px] border-solid border rounded-[4px] border-[#ebebeb] dark:border-zinc-600 bg-[var(--primary-white)]',
           showMenu && 'block',
           !showMenu && 'hidden',
         )}>
@@ -90,6 +90,7 @@ const Nav: FC<NavProps> = (props) => {
   const { isDesktop, isMobile } = useDevice()
   const { theme } = useTheme()
   const isLoaded = useLoaded()
+
   const isDark = (): boolean => {
     return theme === 'dark' && isLoaded
   }
@@ -122,7 +123,7 @@ const Nav: FC<NavProps> = (props) => {
         {/* 移动端导航条 */}
         {isMobile() && <MobileNav {...props} />}
 
-        <ThemeButton className="text-[1.5rem] mr-[0.917rem]" />
+        <ThemeButton className="text-[1.5rem] mr-[0.917rem] h-10 w-10 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-700" />
       </nav>
     </header>
   )
