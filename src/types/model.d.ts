@@ -8,3 +8,12 @@ interface Menu {
   publishedAt: string
   type: string
 }
+
+// 文章类型
+interface ArticleType {
+  name: string
+  path: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}

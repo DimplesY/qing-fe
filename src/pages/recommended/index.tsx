@@ -1,6 +1,6 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import Seo from '@/components/Seo'
-import { getMenus } from '@/api/menus'
+import { getArticleTypeList, getMenus } from '@/api/home'
 import Layout from '@/layout/Layout'
 import Tabs from '@/components/Tabs'
 import { AdvImage } from '@/components/Adv'
@@ -8,19 +8,20 @@ import Main from '@/components/Main'
 
 interface HomeProps {
   menus: CommonData<Menu>[]
+  articleTypeList: CommonData<ArticleType>[]
 }
 
-const Home: NextPage<HomeProps> = ({ menus }) => {
+const Home: NextPage<HomeProps> = ({ menus, articleTypeList }) => {
   return (
     <Layout menus={menus} activeId={1}>
       <Seo />
-      <Tabs />
+      <Tabs articleTypeList={articleTypeList} activeId={1} />
       <Main className="flex justify-between mt-[16px]">
         {/* 文章列表 */}
-        <div className="w-[700px] bg-[var(--primary-white)]"></div>
+        <div className="flex-1 min-h-[100vh] sm:max-w-[700px] bg-[var(--primary-white)]"></div>
 
         {/* 广告栏 */}
-        <div className="hidden sm:block">
+        <div className="hidden sm:block w-[240px]">
           <AdvImage
             img="/advImage1.jpg"
             adLink="/"
@@ -35,11 +36,14 @@ const Home: NextPage<HomeProps> = ({ menus }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await getMenus()
-  const menus = response.data
+  const menusResponse = await getMenus()
+  const menus = menusResponse.data
+  const articleTypeResponse = await getArticleTypeList()
+  const articleTypeList = articleTypeResponse.data
   return {
     props: {
       menus,
+      articleTypeList,
     },
   }
 }

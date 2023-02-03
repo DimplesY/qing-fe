@@ -98,25 +98,27 @@ const Nav: FC<NavProps> = (props) => {
   return (
     <header className={clsxm(styles.header, show ? styles.visible : styles.show)}>
       <nav id="header" className={clsxm(styles.nav)}>
-        {/* PC 端 LOGO light */}
-        <Image
-          src={isDark() ? '/logo_dark.svg' : '/logo.svg'}
-          priority
-          width={107}
-          height={22}
-          alt="稀土掘金"
-          className={styles.logo}
-        />
+        <Link href="/">
+          {/* PC 端 LOGO light */}
+          <Image
+            src={isDark() ? '/logo_dark.svg' : '/logo.svg'}
+            priority
+            width={107}
+            height={22}
+            alt="稀土掘金"
+            className={styles.logo}
+          />
 
-        {/* 移动端 LOGO light */}
-        <Image
-          src="/m-logo.svg"
-          priority
-          width={31}
-          height={24}
-          alt="稀土掘金"
-          className={styles.logoMobile}
-        />
+          {/* 移动端 LOGO light */}
+          <Image
+            src="/m-logo.svg"
+            priority
+            width={31}
+            height={24}
+            alt="稀土掘金"
+            className={styles.logoMobile}
+          />
+        </Link>
 
         {/* PC端导航条 */}
         {isDesktop() && <DesktopNav {...props} />}

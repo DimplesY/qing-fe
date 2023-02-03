@@ -6,3 +6,10 @@ export function getMenus() {
     method: 'GET',
   })
 }
+
+export function getArticleTypeList() {
+  return request<CommResponse<ArticleType>>({
+    url: '/article-types',
+    method: 'GET',
+  })
+}
