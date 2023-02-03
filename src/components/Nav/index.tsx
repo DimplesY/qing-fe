@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 import Badge from '../Badge'
+import ThemeButton from '../ThemeButton'
 import styles from './index.module.scss'
 
 interface NavProps {
@@ -14,13 +15,14 @@ interface NavProps {
 
 // PC 端导航条
 const DesktopNav: FC<NavProps> = ({ menus, activeId }) => (
-  <ul className="flex h-full text-[1.167rem]">
+  <ul className="flex flex-1 h-full text-[1.167rem] max-w-[1000px] overflow-scroll">
     {menus.map((menu) => (
       <li
         className={clsxm(
-          'h-full mx-4 leading-[5rem] text-[var(--juejin-font-2)] block',
-          activeId === menu.id && 'text-[#1e80ff] font-[500] hover:text-black',
-          activeId !== menu.id && 'hover:text-black',
+          'h-full mx-4 leading-[5rem] text-[var(--juejin-font-2)] block shrink-0',
+          activeId === menu.id &&
+            'text-[#1e80ff] font-[500] hover:text-black dark:hover:text-white',
+          activeId !== menu.id && 'hover:text-black dark:hover:text-white',
           styles.menuItem,
         )}
         key={menu.id}>
@@ -34,11 +36,10 @@ const DesktopNav: FC<NavProps> = ({ menus, activeId }) => (
 const Nav: FC<NavProps> = (props) => {
   const show = useShowHeader()
   const { isDesktop } = useDevice()
-
   return (
     <header className={clsxm(styles.header, show ? styles.visible : styles.show)}>
       <nav id="header" className={clsxm(styles.nav)}>
-        {/* PC 端 LOGO */}
+        {/* PC 端 LOGO light */}
         <Image
           src="/logo.svg"
           priority
@@ -47,7 +48,8 @@ const Nav: FC<NavProps> = (props) => {
           alt="稀土掘金"
           className={styles.logo}
         />
-        {/* 移动端 LOGO */}
+
+        {/* 移动端 LOGO light */}
         <Image
           src="/m-logo.svg"
           priority
@@ -59,6 +61,8 @@ const Nav: FC<NavProps> = (props) => {
 
         {/* PC端导航条 */}
         {isDesktop() && <DesktopNav {...props} />}
+
+        <ThemeButton className="text-[1.5rem] " />
       </nav>
     </header>
   )
