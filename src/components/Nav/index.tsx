@@ -9,7 +9,7 @@ import ThemeButton from '../ThemeButton'
 import styles from './index.module.scss'
 import { BiCaretDown } from 'react-icons/bi'
 import { useClickAway } from 'ahooks'
-
+import { useTheme } from 'next-themes'
 interface NavProps {
   menus: CommonData<Menu>[]
   activeId: number
@@ -86,12 +86,18 @@ const DesktopNav: FC<NavProps> = ({ menus, activeId }) => (
 const Nav: FC<NavProps> = (props) => {
   const show = useShowHeader()
   const { isDesktop, isMobile } = useDevice()
+  const { theme } = useTheme()
+
+  const isDark = (): boolean => {
+    return theme === 'dark'
+  }
+
   return (
     <header className={clsxm(styles.header, show ? styles.visible : styles.show)}>
       <nav id="header" className={clsxm(styles.nav)}>
         {/* PC 端 LOGO light */}
         <Image
-          src="/logo.svg"
+          src={isDark() ? '/logo_dark.svg' : '/logo.svg'}
           priority
           width={107}
           height={22}
