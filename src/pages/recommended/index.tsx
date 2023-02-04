@@ -5,7 +5,7 @@ import Layout from '@/layout/Layout'
 import Tabs from '@/components/Tabs'
 import { AdvImage } from '@/components/Adv'
 import Main from '@/components/Main'
-
+import { QrCode } from '@/components/QrCode'
 interface HomeProps {
   menus: CommonData<Menu>[]
   articleTypeList: CommonData<ArticleType>[]
@@ -28,6 +28,14 @@ const Home: NextPage<HomeProps> = ({ menus, articleTypeList }) => {
             link="/"
             alt="稀土掘金"
             className="w-[240px] h-[200px] overflow-hidden rounded-[2px]"
+          />
+
+          {/* 二维码小组件 */}
+          <QrCode
+            img="/qrCode.png"
+            qrLink="/"
+            title="下载稀土掘金APP"
+            description="一个帮助开发者成长的社区"
           />
         </div>
       </Main>
