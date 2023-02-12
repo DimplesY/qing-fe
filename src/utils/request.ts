@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios'
 import type { InternalAxiosRequestConfig, AxiosError, AxiosResponse } from 'axios'
 
 const instance = axios.create({
-  baseURL: process.env.API_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
 })
 
 instance.interceptors.request.use(

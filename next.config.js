@@ -4,8 +4,15 @@ const nextConfig = {
   compiler: {
     emotion: true,
   },
-  env: {
-    API_URL: 'http://localhost:1337/api',
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '1337',
+        pathname: '/uploads/**',
+      },
+    ],
   },
   rewrites() {
     return [
