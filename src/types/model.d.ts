@@ -37,3 +37,11 @@ interface Advertisement {
   updatedAt: string
   publishedAt: string
 }
+
+interface ArticleTab {
+  name: string
+  link: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}

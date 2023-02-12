@@ -1,26 +1,80 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import Seo from '@/components/Seo'
-import { getAdvertisements, getArticleTypeList, getMenus } from '@/api/home'
+import { getAdvertisements, getArticleTabs, getArticleTypeList, getMenus } from '@/api/home'
 import Layout from '@/layout/Layout'
 import Tabs from '@/components/Tabs'
 import { AdvImage } from '@/components/Adv'
 import Main from '@/components/Main'
 import { QrCode } from '@/components/QrCode'
 import AuthorList from '@/components/AuthorList'
+import Link from 'next/link'
+import clsxm from '@/utils/clsxm'
+import { FC, useMemo } from 'react'
+import { useRouter } from 'next/router'
+
+interface ArticleTabProps {
+  articleTabList: CommonData<ArticleTab>[]
+}
+
+// 文章顶部的 tab
+const ArticleTab: FC<ArticleTabProps> = ({ articleTabList }) => {
+  const router = useRouter()
+
+  // 生成 tab 数据
+  const articleTabs = useMemo(
+    () =>
+      articleTabList.map((item) => ({
+        id: item.id,
+        name: item.attributes.name,
+        link: item.attributes.link,
+        active:
+          router.asPath === item.attributes.link ||
+          (router.asPath === '/' && item.attributes.link === '/recommended'),
+      })),
+    [router, articleTabList],
+  )
+
+  return (
+    <div className="px-4 py-[1.3rem] border-b border-solid border-b-[hsla(0,0%,59.2%,.1)]">
+      <ul className="flex leading-[1]">
+        {articleTabs.map((item) => (
+          <li
+            key={item.id}
+            className="shrink-0 text-[1.17rem] px-[1.2rem] last:border-none border-r border-solid border-r-[hsla(0,0%,59.2%,.2)] text-[var(--tabs-color)]">
+            <Link
+              href={item.link || '/'}
+              className={clsxm(
+                'inline-block hover:text-[var(--tabs-active-color)]',
+                item.active && 'text-[var(--tabs-active-color)]',
+              )}>
+              {item.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
 interface HomeProps {
   menus: CommonData<Menu>[]
   articleTypeList: CommonData<ArticleType>[]
   advImageList: CommonData<Advertisement>[]
+  articleTabList: CommonData<ArticleTab>[]
 }
 
-const Home: NextPage<HomeProps> = ({ menus, articleTypeList, advImageList }) => {
+// 首页
+const Home: NextPage<HomeProps> = ({ menus, articleTypeList, advImageList, articleTabList }) => {
   return (
     <Layout menus={menus} activeId={1}>
       <Seo />
       <Tabs articleTypeList={articleTypeList} activeId={1} />
       <Main className="flex justify-between mt-[16px]">
         {/* 文章列表 */}
-        <div className="flex-1 min-h-[100vh] sm:max-w-[700px] bg-[var(--primary-white)]"></div>
+        <div className="flex-1 min-h-[100vh] sm:max-w-[700px] bg-[var(--primary-white)]">
+          {/* 顶部分类栏 */}
+          <ArticleTab articleTabList={articleTabList} />
+        </div>
 
         {/* 广告栏 */}
         <div className="hidden sm:block w-[240px]">
@@ -28,7 +82,7 @@ const Home: NextPage<HomeProps> = ({ menus, articleTypeList, advImageList }) => 
             <AdvImage
               key={item.id}
               img={process.env.NEXT_PUBLIC_API_URL + item.attributes.img.data.attributes.url}
-              adLink={item.attributes.advLink}
+              advLink={item.attributes.advLink}
               link={item.attributes.link}
               alt={item.attributes.alt || '稀土掘金'}
               className="w-[240px] h-[200px] overflow-hidden rounded-[2px] mb-[1.3rem]"
@@ -58,16 +112,19 @@ export const getServerSideProps: GetServerSideProps = async () => {
   // 文章分类
   const articleTypeResponse = await getArticleTypeList()
   const articleTypeList = articleTypeResponse.data
-
   // 图片广告
   const advImageResponse = await getAdvertisements()
   const advImageList = advImageResponse.data
+  // 获取文章栏顶部的tab
+  const articleTabResponse = await getArticleTabs()
+  const articleTabList = articleTabResponse.data
 
   return {
     props: {
       menus,
       articleTypeList,
       advImageList,
+      articleTabList,
     },
   }
 }

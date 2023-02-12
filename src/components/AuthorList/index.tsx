@@ -31,7 +31,7 @@ export const Author: FC<AuthorInfo> = ({ name, path, imageUrl, gradeUrl, positio
         />
 
         <div className="ml-[3px]">
-          <div className="flex">
+          <div className="flex items-center">
             <span className="text-[14px]">{name}</span>
             <Image
               src={gradeUrl}

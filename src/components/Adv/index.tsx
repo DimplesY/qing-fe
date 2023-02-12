@@ -12,22 +12,25 @@ type AdvImageProps = ComponentPropsWithoutRef<'div'> & {
   /** 图片描述 */
   alt: string
   /** 广告投放链接 */
-  adLink: string
+  advLink: string
 }
 
 // 图片广告组件
-export const AdvImage: FC<AdvImageProps> = ({ className, img, link, adLink, alt, ...rest }) => {
+export const AdvImage: FC<AdvImageProps> = ({ className, img, link, advLink, alt, ...rest }) => {
   const [show, setShow] = useState(true)
 
   return (
     <>
       {show && (
         <div className={clsxm(className, 'relative group')} {...rest}>
+          {/* 关闭按钮 */}
           <FiX
             onClick={() => setShow(false)}
             size="1.5rem"
             className="opacity-50 text-[#909090] font-bold absolute top-2 right-2 hover:opacity-100 cursor-pointer hidden group-hover:block"
           />
+
+          {/* 广告图片 */}
           <Link href={link} className="w-full h-full block">
             <Image
               src={img}
@@ -40,7 +43,7 @@ export const AdvImage: FC<AdvImageProps> = ({ className, img, link, adLink, alt,
           </Link>
 
           <div className="px-[15px] leading-[36px] box-content rounded-[6px] border border-white border-solid text-[20px] text-white absolute bottom-[10px] right-[10px] font-[300] bg-[rgba(0,0,0,.2)] hover:bg-[rgba(0,0,0,.4)] scale-50 origin-bottom-right group">
-            <Link href={adLink} className="flex">
+            <Link href={advLink} className="flex">
               <span className="hidden group-hover:block">投放</span>
               <span>广告</span>
             </Link>

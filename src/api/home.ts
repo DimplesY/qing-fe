@@ -23,3 +23,11 @@ export function getAdvertisements() {
     method: 'GET',
   })
 }
+
+// 获取文章栏顶部的tab
+export function getArticleTabs() {
+  return request<CommResponse<ArticleTab>>({
+    url: '/api/article-tabs',
+    method: 'GET',
+  })
+}
