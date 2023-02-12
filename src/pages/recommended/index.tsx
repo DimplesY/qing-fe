@@ -6,6 +6,7 @@ import Tabs from '@/components/Tabs'
 import { AdvImage } from '@/components/Adv'
 import Main from '@/components/Main'
 import { QrCode } from '@/components/QrCode'
+import AuthorList from '@/components/AuthorList'
 interface HomeProps {
   menus: CommonData<Menu>[]
   articleTypeList: CommonData<ArticleType>[]
@@ -37,6 +38,9 @@ const Home: NextPage<HomeProps> = ({ menus, articleTypeList }) => {
             title="下载稀土掘金APP"
             description="一个帮助开发者成长的社区"
           />
+
+          {/* 作者榜组件 */}
+          <AuthorList authorList="" />
         </div>
       </Main>
     </Layout>

@@ -17,3 +17,14 @@ interface ArticleType {
   updatedAt: string
   publishedAt: string
 }
+
+interface AuthorType {
+  name: string
+  imageUrl: string
+  gradeUrl: string
+  path: string
+  position: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}
