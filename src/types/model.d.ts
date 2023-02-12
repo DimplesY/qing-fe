@@ -28,3 +28,12 @@ interface AuthorType {
   updatedAt: string
   publishedAt: string
 }
+interface Advertisement {
+  link: string
+  alt: string
+  advLink: string
+  img: WrapperImage
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}
