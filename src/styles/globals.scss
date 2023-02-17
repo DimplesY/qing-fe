@@ -9,6 +9,8 @@
   --menu-split-line-color: #f1f1f1;
   --tabs-active-color: #007fff;
   --juejin-font-2: #515767;
+  --article-title-color: #2d2d2d;
+  --article-split-line-color: #e5e6eb;
 }
 
 html.dark {
@@ -18,11 +20,14 @@ html.dark {
   --menu-split-line-color: #2d3748;
   --tabs-active-color: #63b3ed;
   --juejin-font-2: #a0aec0;
+  --article-title-color: #cbcbcb;
+  --article-split-line-color: #2d3748;
 }
 
 html {
   font-size: 12px;
   background-color: var(--primary-bg-color);
+  @apply duration-200;
 }
 
 body {

@@ -11,6 +11,7 @@ import Link from 'next/link'
 import clsxm from '@/utils/clsxm'
 import { FC, useMemo } from 'react'
 import { useRouter } from 'next/router'
+import ArticleItem from '@/components/ArticleItem'
 
 interface ArticleTabProps {
   articleTabList: CommonData<ArticleTab>[]
@@ -71,9 +72,14 @@ const Home: NextPage<HomeProps> = ({ menus, articleTypeList, advImageList, artic
       <Tabs articleTypeList={articleTypeList} activeId={1} />
       <Main className="flex justify-between mt-[16px]">
         {/* 文章列表 */}
-        <div className="flex-1 min-h-[100vh] sm:max-w-[700px] bg-[var(--primary-white)]">
+        <div className="flex-1 min-h-[100vh] sm:max-w-[700px] bg-[var(--primary-white)] transition-all duration-200">
           {/* 顶部分类栏 */}
           <ArticleTab articleTabList={articleTabList} />
+
+          {/* 文章列表 */}
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((item) => (
+            <ArticleItem key={item} />
+          ))}
         </div>
 
         {/* 广告栏 */}

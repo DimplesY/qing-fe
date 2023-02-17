@@ -1,0 +1,16 @@
+.textOverflow {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.splitDot {
+  @apply relative flex items-center px-[8px] hover:text-[var(--tabs-active-color)];
+  &:not(:last-child)::after {
+    content: '';
+    color: var(--tabs-color);
+    @apply w-[2px] h-[2px] block rounded-[50%] bg-[#4e5969] absolute right-[-1px];
+  }
+}
