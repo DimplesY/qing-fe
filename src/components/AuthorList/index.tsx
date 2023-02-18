@@ -2,7 +2,7 @@ import { FC } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 interface AuthorListProps {
-  authorList: string
+  authorList: CommonData<AuthorType>[]
 }
 
 interface AuthorInfo {
@@ -30,7 +30,7 @@ export const Author: FC<AuthorInfo> = ({ name, path, imageUrl, gradeUrl, positio
           className="w-[48px] h-[48px] rounded-full"
         />
 
-        <div className="ml-[3px]">
+        <div className="ml-[6px]">
           <div className="flex items-center">
             <span className="text-[14px]">{name}</span>
             <Image
@@ -48,34 +48,28 @@ export const Author: FC<AuthorInfo> = ({ name, path, imageUrl, gradeUrl, positio
   )
 }
 
-const AuthorList: FC<AuthorListProps> = ({ authorList = '' }) => {
+const AuthorList: FC<AuthorListProps> = ({ authorList }) => {
   return (
     <div className="w-[240px] bg-white bg-[var(--primary-white)] rounded-[2px] mt-[16px]">
       <div className="h-[43px] pl-[16px] leading-[43px] border-b border-solid border-[var(--menu-split-line-color)]">
         🎖️作者榜
       </div>
-      {authorList}
-      <Author
-        name="工边页字"
-        path="/"
-        imageUrl="/authorImg/author3.png"
-        gradeUrl="/authorImg/grade.png"
-        position="前端工程师"
-      />
-      <Author
-        name="Nakano_May"
-        path="/"
-        imageUrl="/authorImg/author2.png"
-        gradeUrl="/authorImg/grade.png"
-        position="Java工程师"
-      />
-      <Author
-        name="掘金酱"
-        path="/"
-        imageUrl="/authorImg/author1.png"
-        gradeUrl="/authorImg/grade.png"
-        position="掘金首席客服君"
-      />
+      {authorList.map((item) => {
+        return (
+          <Author
+            key={item.id}
+            name={item.attributes.name}
+            path={item.attributes.path}
+            imageUrl={
+              process.env.NEXT_PUBLIC_API_URL + item.attributes.imageUrl.data.attributes.url
+            }
+            gradeUrl={
+              process.env.NEXT_PUBLIC_API_URL + item.attributes.gradeUrl.data.attributes.url
+            }
+            position={item.attributes.position}
+          />
+        )
+      })}
     </div>
   )
 }

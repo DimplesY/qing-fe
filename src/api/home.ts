@@ -31,3 +31,11 @@ export function getArticleTabs() {
     method: 'GET',
   })
 }
+
+// 获取作者列表
+export function getauthorList() {
+  return request<CommResponse<AuthorType>>({
+    url: '/api/authors',
+    method: 'GET',
+  })
+}

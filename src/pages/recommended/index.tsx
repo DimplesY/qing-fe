@@ -1,6 +1,12 @@
 import type { GetServerSideProps, NextPage } from 'next'
 import Seo from '@/components/Seo'
-import { getAdvertisements, getArticleTabs, getArticleTypeList, getMenus } from '@/api/home'
+import {
+  getAdvertisements,
+  getArticleTabs,
+  getArticleTypeList,
+  getMenus,
+  getauthorList,
+} from '@/api/home'
 import Layout from '@/layout/Layout'
 import Tabs from '@/components/Tabs'
 import { AdvImage } from '@/components/Adv'
@@ -62,10 +68,17 @@ interface HomeProps {
   articleTypeList: CommonData<ArticleType>[]
   advImageList: CommonData<Advertisement>[]
   articleTabList: CommonData<ArticleTab>[]
+  authorList: CommonData<AuthorType>[]
 }
 
 // 首页
-const Home: NextPage<HomeProps> = ({ menus, articleTypeList, advImageList, articleTabList }) => {
+const Home: NextPage<HomeProps> = ({
+  menus,
+  articleTypeList,
+  advImageList,
+  articleTabList,
+  authorList,
+}) => {
   return (
     <Layout menus={menus} activeId={1}>
       <Seo />
@@ -104,7 +117,7 @@ const Home: NextPage<HomeProps> = ({ menus, articleTypeList, advImageList, artic
           />
 
           {/* 作者榜组件 */}
-          <AuthorList authorList="" />
+          <AuthorList authorList={authorList} />
         </div>
       </Main>
     </Layout>
@@ -125,12 +138,17 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const articleTabResponse = await getArticleTabs()
   const articleTabList = articleTabResponse.data
 
+  // 作者榜
+  const authorListResponse = await getauthorList()
+  const authorList = authorListResponse.data
+
   return {
     props: {
       menus,
       articleTypeList,
       advImageList,
       articleTabList,
+      authorList,
     },
   }
 }

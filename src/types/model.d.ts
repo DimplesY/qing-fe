@@ -20,8 +20,8 @@ interface ArticleType {
 
 interface AuthorType {
   name: string
-  imageUrl: string
-  gradeUrl: string
+  imageUrl: WrapperImage
+  gradeUrl: WrapperImage
   path: string
   position: string
   createdAt: string
