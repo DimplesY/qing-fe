@@ -33,7 +33,7 @@ export function getArticleTabs() {
 }
 
 // 获取作者列表
-export function getauthorList() {
+export function getAuthorList() {
   return request<CommResponse<AuthorType>>({
     url: '/api/authors',
     method: 'GET',

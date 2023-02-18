@@ -5,7 +5,7 @@ import {
   getArticleTabs,
   getArticleTypeList,
   getMenus,
-  getauthorList,
+  getAuthorList,
 } from '@/api/home'
 import Layout from '@/layout/Layout'
 import Tabs from '@/components/Tabs'
@@ -65,6 +65,7 @@ const ArticleTab: FC<ArticleTabProps> = ({ articleTabList }) => {
 
 interface HomeProps {
   menus: CommonData<Menu>[]
+  activeId: number
   articleTypeList: CommonData<ArticleType>[]
   advImageList: CommonData<Advertisement>[]
   articleTabList: CommonData<ArticleTab>[]
@@ -74,15 +75,16 @@ interface HomeProps {
 // 首页
 const Home: NextPage<HomeProps> = ({
   menus,
+  activeId,
   articleTypeList,
   advImageList,
-  articleTabList,
   authorList,
+  articleTabList,
 }) => {
   return (
-    <Layout menus={menus} activeId={1}>
+    <Layout menus={menus} activeId={activeId}>
       <Seo />
-      <Tabs articleTypeList={articleTypeList} activeId={1} />
+      <Tabs articleTypeList={articleTypeList} activeId={activeId} />
       <Main className="flex justify-between mt-[16px]">
         {/* 文章列表 */}
         <div className="flex-1 min-h-[100vh] sm:max-w-[700px] bg-[var(--primary-white)] transition-all duration-200">
@@ -124,7 +126,7 @@ const Home: NextPage<HomeProps> = ({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   // 顶部菜单
   const menusResponse = await getMenus()
   const menus = menusResponse.data
@@ -139,12 +141,20 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const articleTabList = articleTabResponse.data
 
   // 作者榜
-  const authorListResponse = await getauthorList()
+  const authorListResponse = await getAuthorList()
   const authorList = authorListResponse.data
+  // 激活的菜单
+  const { category } = query
+  const { id: activeId } = articleTypeList.find(
+    (item) => item.attributes.path === '/' + category,
+  ) || {
+    id: 1,
+  }
 
   return {
     props: {
       menus,
+      activeId,
       articleTypeList,
       advImageList,
       articleTabList,
