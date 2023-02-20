@@ -143,6 +143,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   // 作者榜
   const authorListResponse = await getAuthorList()
   const authorList = authorListResponse.data
+
   // 激活的菜单
   const { category } = query
   const { id: activeId } = articleTypeList.find(
