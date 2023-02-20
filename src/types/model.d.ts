@@ -59,3 +59,18 @@ interface ArticleTab {
   updatedAt: string
   publishedAt: string
 }
+
+// 文章详情
+interface ArticleDetails {
+  author: string
+  title: string
+  desc: string
+  cover: WrapperImage
+  content: string
+  articleType: string
+  authorImg: WrapperImage
+  view: number
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}
