@@ -87,7 +87,7 @@ const Home: NextPage<HomeProps> = ({
       <Tabs articleTypeList={articleTypeList} activeId={activeId} />
       <Main className="flex justify-between mt-[16px]">
         {/* 文章列表 */}
-        <div className="flex-1 min-h-[100vh] sm:max-w-[700px] bg-[var(--primary-white)] transition-all duration-200">
+        <div className="flex-1 pb-4  sm:max-w-[700px] bg-[var(--primary-white)] transition-all duration-200">
           {/* 顶部分类栏 */}
           <ArticleTab articleTabList={articleTabList} />
 

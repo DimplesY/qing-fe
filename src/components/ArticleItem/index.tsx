@@ -11,6 +11,7 @@ interface ArticleItemProps {
   content: string
   author: string
   view: number
+  cover: string
   publishedAt: string
 }
 
@@ -55,13 +56,15 @@ const ArticleItem: FC<ArticleItemProps> = (props) => {
           </div>
         </div>
 
-        <Image
-          width={120}
-          height={80}
-          className="w-[120px] h-[80px] rounded-[2px] bg-white ml-8"
-          alt="稀土掘金"
-          src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/975b36e66dd54f38b5adeab032251c53~tplv-k3u1fbpfcp-no-mark:240:240:240:160.awebp?"
-        />
+        {props.cover && (
+          <Image
+            width={120}
+            height={80}
+            className="w-[120px] h-[80px] rounded-[2px] bg-white ml-8"
+            alt="稀土掘金"
+            src={process.env.NEXT_PUBLIC_API_URL + props.cover}
+          />
+        )}
       </div>
     </div>
   )
