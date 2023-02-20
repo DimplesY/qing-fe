@@ -40,20 +40,26 @@ export function getAuthorList() {
   })
 }
 
+// 文章排序类型, 这里不抽离到单独的文件, 放到 d.ts 里运行没效果
+enum SortEnum {
+  newest = 'publishedAt:desc',
+  hottest = 'view:desc',
+}
+
+export type SortType = keyof typeof SortEnum
+
 // 获取文章列表
-export function getArticleList(pageNum = 1, sort?: SortType) {
+export function getArticleList(pageNum = 1, sort?: SortType, category = 'recommended') {
   const params: Record<string, number | string | boolean> = {
     'pagination[pageSize]': 10,
     'pagination[page]': pageNum,
+    'filters[isRecommended][$in][0]': true,
+    'filters[isRecommended][$in][1]': false,
+    'filters[article_types][path]': `/${category}`,
   }
-  // 默认显示推荐的文
-  if (!sort) {
-    params['filters[isRecommended]'] = true
-  }
-  // 如果有排序的话，就添加排序的参数
-  if (sort) {
-    params['sort[0]'] = SortEnum[sort]
-  }
+
+  sort && (params['sort[0]'] = SortEnum[sort])
+  !sort && delete params['filters[isRecommended][$in][1]']
 
   return request<CommResponse<Article>>({
     url: '/api/articles',

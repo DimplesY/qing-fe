@@ -33,7 +33,7 @@ const ArticleTab: FC<ArticleTabProps> = ({ articleTabList }) => {
       articleTabList.map((item) => ({
         id: item.id,
         name: item.attributes.name,
-        link: item.attributes.link.replace('[type]', router.query.category as string),
+        link: item.attributes.link.replace('[type]', router.query.category as string) || '/',
         active:
           router.asPath === item.attributes.link.replace('[type]', router.query.category as string),
       })),
@@ -48,7 +48,7 @@ const ArticleTab: FC<ArticleTabProps> = ({ articleTabList }) => {
             key={item.id}
             className="shrink-0 text-[1.17rem] px-[1.2rem] last:border-none border-r border-solid border-r-[hsla(0,0%,59.2%,.2)] text-[var(--tabs-color)]">
             <Link
-              href={item.link || '/'}
+              href={item.link}
               className={clsxm(
                 'inline-block hover:text-[var(--tabs-active-color)]',
                 item.active && 'text-[var(--tabs-active-color)]',

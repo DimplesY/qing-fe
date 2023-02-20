@@ -30,14 +30,6 @@ interface WrapperType<T = CommonImage> {
   }
 }
 
-// 文章排序类型
-enum SortEnum {
-  newest = 'updatedAt:desc',
-  hottest = 'view:desc',
-}
-
-type SortType = keyof typeof SortEnum
-
 declare namespace NodeJS {
   export interface ProcessEnv {
     NEXT_PUBLIC_API_URL: string
