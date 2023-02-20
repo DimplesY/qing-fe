@@ -60,7 +60,7 @@ const ArticleList: FC = () => {
       />,
     )
   }
-  return <>{pages}</>
+  return <>{pages.current}</>
 }
 
 export default ArticleList
