@@ -19,11 +19,12 @@ const nextConfig = {
       },
     ],
   },
-  rewrites() {
+  redirects() {
     return [
       {
         source: '/',
         destination: '/recommended',
+        permanent: true,
       },
     ]
   },

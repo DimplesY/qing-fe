@@ -34,9 +34,7 @@ const ArticleTab: FC<ArticleTabProps> = ({ articleTabList }) => {
         id: item.id,
         name: item.attributes.name,
         link: item.attributes.link,
-        active:
-          router.asPath === item.attributes.link ||
-          (router.asPath === '/' && item.attributes.link === '/recommended'),
+        active: router.asPath === item.attributes.link,
       })),
     [router, articleTabList],
   )
