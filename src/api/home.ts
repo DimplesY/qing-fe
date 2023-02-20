@@ -61,11 +61,3 @@ export function getArticleList(pageNum = 1, sort?: SortType) {
     params,
   })
 }
-
-// 获取文章详情
-export function getArticleDetails(articleId: string[] | string | undefined) {
-  return request<CommResponse<ArticleDetails>>({
-    url: `/api/articles/${articleId}`,
-    method: 'GET',
-  })
-}

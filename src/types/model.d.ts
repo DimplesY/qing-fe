@@ -62,7 +62,7 @@ interface ArticleTab {
 
 // 文章详情
 interface ArticleDetails {
-  author: string
+  author: AuthorType
   title: string
   desc: string
   cover: WrapperImage
