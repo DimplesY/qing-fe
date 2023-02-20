@@ -1,15 +1,21 @@
 import { getArticleList } from '@/api/home'
-import { FC } from 'react'
+import { useRouter } from 'next/router'
+import { FC, useEffect, useRef } from 'react'
 import useSWR from 'swr'
 import ArticleItem from '../ArticleItem'
 import useNextPage from './useNextPage'
 
 interface ArticlePageProps {
   pageNum: number
+  sort: string
+  category: string
 }
 
-const ArticlePage = ({ pageNum }: ArticlePageProps) => {
-  const { data } = useSWR(`articleList?page=${pageNum}`, () => getArticleList(pageNum))
+const ArticleListPage = ({ pageNum, sort, category }: ArticlePageProps) => {
+  const { data } = useSWR(
+    `/api/articles?page=${pageNum}&sort=${sort ? sort : ''}&type=${category}`,
+    () => getArticleList(pageNum, sort as SortType),
+  )
   const articleList = data?.data
 
   if (data?.data.length === 0) return null
@@ -27,7 +33,7 @@ const ArticlePage = ({ pageNum }: ArticlePageProps) => {
             author={item.attributes.author.data.attributes.name}
             view={item.attributes.view}
             publishedAt={item.attributes.publishedAt}
-            cover={item.attributes.cover.data?.attributes.url || ''}
+            cover={item.attributes.cover.data?.attributes.url}
           />
         ))}
     </>
@@ -35,10 +41,24 @@ const ArticlePage = ({ pageNum }: ArticlePageProps) => {
 }
 
 const ArticleList: FC = () => {
-  const pages: JSX.Element[] = []
+  const router = useRouter()
   const { pageNum } = useNextPage()
+  const pages = useRef<JSX.Element[]>([])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    pages.current = []
+  }, [router])
+
   for (let i = 1; i <= pageNum; i++) {
-    pages.push(<ArticlePage pageNum={i} key={i} />)
+    pages.current.push(
+      <ArticleListPage
+        pageNum={i}
+        sort={router.query.sort as string}
+        category={router.query.category as string}
+        key={i}
+      />,
+    )
   }
   return <>{pages}</>
 }

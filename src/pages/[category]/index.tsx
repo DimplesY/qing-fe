@@ -33,8 +33,9 @@ const ArticleTab: FC<ArticleTabProps> = ({ articleTabList }) => {
       articleTabList.map((item) => ({
         id: item.id,
         name: item.attributes.name,
-        link: item.attributes.link,
-        active: router.asPath === item.attributes.link,
+        link: item.attributes.link.replace('[type]', router.query.category as string),
+        active:
+          router.asPath === item.attributes.link.replace('[type]', router.query.category as string),
       })),
     [router, articleTabList],
   )
@@ -80,7 +81,7 @@ const Home: NextPage<HomeProps> = ({
   articleTabList,
 }) => {
   return (
-    <Layout menus={menus} activeId={activeId}>
+    <Layout menus={menus} activeId={1}>
       <Seo />
       <Tabs articleTypeList={articleTypeList} activeId={activeId} />
       <Main className="flex justify-between mt-[16px]">

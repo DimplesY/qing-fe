@@ -41,10 +41,18 @@ export function getAuthorList() {
 }
 
 // 获取文章列表
-export function getArticleList(pageNum = 1) {
-  const params = {
+export function getArticleList(pageNum = 1, sort?: SortType) {
+  const params: Record<string, number | string | boolean> = {
     'pagination[pageSize]': 10,
     'pagination[page]': pageNum,
+  }
+  // 默认显示推荐的文
+  if (!sort) {
+    params['filters[isRecommended]'] = true
+  }
+  // 如果有排序的话，就添加排序的参数
+  if (sort) {
+    params['sort[0]'] = SortEnum[sort]
   }
 
   return request<CommResponse<Article>>({

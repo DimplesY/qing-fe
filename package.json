@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.4.2",
+    "@tailwindcss/typography": "^0.5.9",
     "@types/ms": "^0.7.31",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",

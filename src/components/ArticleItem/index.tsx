@@ -7,24 +7,33 @@ import Link from 'next/link'
 import ms from 'ms'
 
 interface ArticleItemProps {
+  // 编号
   id: number
+  // 标题
   title: string
+  // 描述
   desc: string
+  // 内容
   content: string
+  // 作者
   author: string
+  // 浏览量
   view: number
-  cover: string
+  // 封面图
+  cover?: string
+  // 发布时间
   publishedAt: string
 }
 
 const ArticleItem: FC<ArticleItemProps> = (props) => {
   const time = ms(Date.now() - new Date(props.publishedAt).getTime(), { long: true })
-    .replace('years', '年')
-    .replace('months', '月')
-    .replace('days', '天')
-    .replace('hours', '小时')
-    .replace('minutes', '分钟')
-    .replace('seconds', '秒')
+    .replace(/year(s)?/g, '年')
+    .replace(/month(s)?/g, '月')
+    .replace(/day(s)?/g, '天')
+    .replace(/hour(s)?/g, '小时')
+    .replace(/minute(s)?/g, '分钟')
+    .replace(/second(s)?/g, '秒')
+
   return (
     <div className="w-full pt-4 px-[20px] cursor-pointer">
       <div className="flex items-center text-[13px] leading-[22px] whitespace-nowrap break-all text-[var(--tabs-color)]">

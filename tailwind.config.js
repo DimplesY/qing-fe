@@ -16,5 +16,8 @@ module.exports = {
       tabs: '0 1px 2px 0 rgb(0 0 0 / 5%)',
     },
   },
-  plugins: [require('tailwind-scrollbar')({ noncompatible: true })],
+  plugins: [
+    require('tailwind-scrollbar')({ noncompatible: true }),
+    require('@tailwindcss/typography'),
+  ],
 }

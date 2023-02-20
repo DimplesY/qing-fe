@@ -22,13 +22,21 @@ interface CommonImage {
   url: string
 }
 
-// 图片的公共属性
+// 包装类型
 interface WrapperType<T = CommonImage> {
   data: {
     id: number
     attributes: T
   }
 }
+
+// 文章排序类型
+enum SortEnum {
+  newest = 'updatedAt:desc',
+  hottest = 'view:desc',
+}
+
+type SortType = keyof typeof SortEnum
 
 declare namespace NodeJS {
   export interface ProcessEnv {

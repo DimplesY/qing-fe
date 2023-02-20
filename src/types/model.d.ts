@@ -26,6 +26,7 @@ interface Article {
   content: string
   view: number
   cover: WrapperType<CommonImage>
+  article_types: { data: CommonData<ArticleType>[] }
   createdAt: string
   updatedAt: string
   publishedAt: string
