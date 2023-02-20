@@ -39,3 +39,17 @@ export function getAuthorList() {
     method: 'GET',
   })
 }
+
+// 获取文章列表
+export function getArticleList(pageNum = 1) {
+  const params = {
+    'pagination[pageSize]': 10,
+    'pagination[page]': pageNum,
+  }
+
+  return request<CommResponse<Article>>({
+    url: '/api/articles',
+    method: 'GET',
+    params,
+  })
+}

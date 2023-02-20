@@ -18,10 +18,23 @@ interface ArticleType {
   publishedAt: string
 }
 
+// 文章
+interface Article {
+  author: WrapperType<AuthorType>
+  title: string
+  desc: string
+  content: string
+  view: number
+  cover: WrapperType<CommonImage>
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}
+
 interface AuthorType {
   name: string
-  imageUrl: WrapperImage
-  gradeUrl: WrapperImage
+  imageUrl: WrapperType<CommonImage>
+  gradeUrl: WrapperType<CommonImage>
   path: string
   position: string
   createdAt: string
@@ -32,7 +45,7 @@ interface Advertisement {
   link: string
   alt: string
   advLink: string
-  img: WrapperImage
+  img: WrapperType<CommonImage>
   createdAt: string
   updatedAt: string
   publishedAt: string

@@ -1,13 +1,24 @@
 import clsxm from '@/utils/clsxm'
 import Image from 'next/image'
+import { IoEyeOutline } from 'react-icons/io5'
 import { FC } from 'react'
 import styles from './index.module.scss'
 
-const ArticleItem: FC = () => {
+interface ArticleItemProps {
+  id: number
+  title: string
+  desc: string
+  content: string
+  author: string
+  view: number
+  publishedAt: string
+}
+
+const ArticleItem: FC<ArticleItemProps> = (props) => {
   return (
     <div className="w-full pt-4 px-[20px] cursor-pointer">
       <div className="flex items-center text-[13px] leading-[22px] whitespace-nowrap break-all text-[var(--tabs-color)]">
-        <div className="text-[var(--article-title-color)] ">掘金管理员</div>
+        <div className="text-[var(--article-title-color)] truncate">{props.author}</div>
         <div className="w-[1px] h-[14px] bg-[var(--article-split-line-color)] mx-[8px]"></div>
         <div>1天前</div>
         <div className="w-[1px] h-[14px] bg-[var(--article-split-line-color)] mx-[8px]"></div>
@@ -18,20 +29,29 @@ const ArticleItem: FC = () => {
       </div>
 
       <div className="pb-4 mt-[10px] w-full border-b border-solid border-[var(--menu-split-line-color)] flex">
-        <div className="w-full h-[50px] flex-1">
+        <div className="w-full flex-1">
           <div
             className={clsxm(
               'text-[var(--article-title-color)] text-[16px] leading-[28px] font-bold mb-[8px]',
               styles.textOverflow,
             )}>
-            讨论：今年哪些岗位不建议去？
+            {props.title}
           </div>
           <div
             className={clsxm(
               'text-[var(--tabs-color)] text-[13px] leading-[22px] mb-[10px]',
               styles.textOverflow,
             )}>
-            之前负责了开源项目YApi和数据应用低代码搭建等工具，在工作中发现产品能力对技术同学影响是非常大的，期望本篇文章对大家有帮助。
+            {props.desc}
+          </div>
+
+          <div className="flex items-center gap-[20px] h-[20px]">
+            <div className="flex items-center">
+              <IoEyeOutline size={16} color="var(--article-icon-color)" />
+              <div className="ml-[4px] text-[var(--article-icon-color)] text-[13px]">
+                {props.view}
+              </div>
+            </div>
           </div>
         </div>
 

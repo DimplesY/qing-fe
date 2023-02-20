@@ -23,10 +23,10 @@ interface CommonImage {
 }
 
 // 图片的公共属性
-interface WrapperImage {
+interface WrapperType<T = CommonImage> {
   data: {
     id: number
-    attributes: CommonImage
+    attributes: T
   }
 }
 
