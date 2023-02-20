@@ -1,0 +1,33 @@
+.prose {
+  max-width: unset;
+  font-size: 16px;
+  @apply rounded-sm;
+}
+.prose p {
+  line-height: inherit;
+  @apply py-[22px];
+}
+.prose h1 {
+  @apply text-[24px] leading-[38px] mb-[5px] mt-[35px];
+}
+.prose pre {
+  @apply my-[35px] text-[12px] scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100;
+}
+
+.prose p code {
+  word-break: break-word;
+  border-radius: 2px;
+  overflow-x: auto;
+  background-color: #fff5f5;
+  color: #ff502c;
+  font-size: 0.87em;
+  padding: 0.065em 0.4em;
+  font-weight: normal;
+  &::before,
+  &::after {
+    display: none;
+  }
+}
+.prose pre code {
+  @apply break-normal;
+}

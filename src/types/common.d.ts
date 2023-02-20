@@ -15,6 +15,11 @@ interface CommResponse<T = unknown> {
   meta: Pagination
 }
 
+interface CommSingleResponse<T = unknown> {
+  data: CommonData<T>
+  meta: Pagination
+}
+
 interface CommonImage {
   name: string
   height: number

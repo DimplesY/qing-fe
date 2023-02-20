@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 
-export function useShowHeader() {
+export function useShowHeader(height = 300) {
   const [show, setShow] = useState(false)
 
   function onscroll() {
-    window.scrollY > 300 ? setShow(true) : setShow(false)
+    window.scrollY > height ? setShow(true) : setShow(false)
   }
 
   useEffect(() => {
