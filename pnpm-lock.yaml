@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@commitlint/config-conventional': ^17.4.2
-  '@dimplesyj/util': ^1.0.4
+  '@dimplesyj/util': ^1.0.5
   '@emotion/react': ^11.10.5
   '@emotion/styled': ^11.10.5
   '@next/font': 13.1.3
@@ -50,7 +50,7 @@ specifiers:
   typescript: 4.9.4
 
 dependencies:
-  '@dimplesyj/util': 1.0.4
+  '@dimplesyj/util': 1.0.5
   '@emotion/react': 11.10.5_3stiutgnnbnfnf3uowm5cip22i
   '@emotion/styled': 11.10.5_jrh5enlbqfbnumycmktdqgd6se
   '@next/font': 13.1.3
@@ -337,10 +337,11 @@ packages:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
 
-  /@dimplesyj/util/1.0.4:
-    resolution: {integrity: sha512-IOvWldYRtfw0pZpv04CP1FS9FqL5v/i0xruNwysfmtQkis8sE9BImJcjyOHQvWv0V19RWB4YJr3lmp/hlvsc8w==}
+  /@dimplesyj/util/1.0.5:
+    resolution: {integrity: sha512-06LXumFEnjngYfUg3XPgd4WdTSX/pHw4/SZX/zzIC7nGZhNfHMuDw51ghiPTyjrGMT3f49a55kvpDyGMPVApzw==}
     dependencies:
       dayjs: 1.11.7
+      throttle-debounce: 5.0.0
     dev: false
 
   /@emotion/babel-plugin/11.10.5:
@@ -4385,6 +4386,11 @@ packages:
 
   /text-table/0.2.0:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
+
+  /throttle-debounce/5.0.0:
+    resolution: {integrity: sha512-2iQTSgkkc1Zyk0MeVrt/3BvuOXYPl/R8Z0U2xxo9rjwNciaHDG3R+Lm6dh4EeUci49DanvBnuqI6jshoQQRGEg==}
+    engines: {node: '>=12.22'}
+    dev: false
 
   /through/2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
