@@ -1,20 +1,25 @@
-import { useEffect, useState } from 'react'
-import { debounce } from '@dimplesyj/util'
+import { useEffect, useRef, useState } from 'react'
 export function useAdvShow(ref: React.RefObject<HTMLDivElement>) {
   const [show, setShow] = useState(false)
-
-  function onscroll() {
-    const offsetHeight = ref.current?.offsetHeight
-
-    if (offsetHeight) {
-      document.documentElement.scrollTop > offsetHeight ? setShow(true) : setShow(false)
-    }
-  }
+  const observer = useRef<IntersectionObserver>()
 
   useEffect(() => {
-    window.addEventListener('scroll', debounce(100, onscroll))
+    observer.current = new IntersectionObserver(
+      (entry) => {
+        if (entry[0].isIntersecting) {
+          setShow(false)
+        } else {
+          setShow(true)
+        }
+      },
+      {
+        rootMargin: '10%',
+        threshold: 0.1,
+      },
+    )
+    observer.current.observe(ref.current as HTMLDivElement)
     return () => {
-      window.removeEventListener('scroll', debounce(100, onscroll))
+      observer.current?.disconnect()
     }
   })
   return show

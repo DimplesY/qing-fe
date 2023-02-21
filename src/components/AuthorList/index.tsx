@@ -1,8 +1,10 @@
 import { FC } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import clsxm from '@/utils/clsxm'
 interface AuthorListProps {
   authorList: CommonData<AuthorType>[]
+  className?: string
 }
 
 interface AuthorInfo {
@@ -48,9 +50,13 @@ export const Author: FC<AuthorInfo> = ({ name, path, imageUrl, gradeUrl, positio
   )
 }
 
-const AuthorList: FC<AuthorListProps> = ({ authorList }) => {
+const AuthorList: FC<AuthorListProps> = ({ authorList, className }) => {
   return (
-    <div className="w-[240px] bg-white bg-[var(--primary-white)] rounded-[2px] mt-[16px]">
+    <div
+      className={clsxm(
+        'w-[240px] bg-white bg-[var(--primary-white)] rounded-[2px] mt-[16px]',
+        className,
+      )}>
       <div className="h-[43px] pl-[16px] leading-[43px] border-b border-solid border-[var(--menu-split-line-color)]">
         🎖️作者榜
       </div>

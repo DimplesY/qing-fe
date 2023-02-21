@@ -217,7 +217,7 @@ const Article: NextPage<ArticleProps> = ({
           />
 
           {/* 右侧内容 */}
-          <div className="hidden sm:block w-[300px] h-[min-content]" ref={scrollRef}>
+          <div className="hidden sm:block w-[300px] h-[min-content]">
             {/* 作者卡片 */}
             <AuthorCard
               name={articleDetails.attributes.author.data.attributes.name}
@@ -227,7 +227,9 @@ const Article: NextPage<ArticleProps> = ({
               }
             />
             {/* 推荐文章 */}
-            <RelatedList recommendedArticleList={recommendedArticleList} />
+            <div ref={scrollRef}>
+              <RelatedList recommendedArticleList={recommendedArticleList} />
+            </div>
 
             {/* 目录 */}
             <div className={clsxm(show ? 'fixed top-0' : 'static')}>

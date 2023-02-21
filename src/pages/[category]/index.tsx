@@ -100,7 +100,7 @@ const Home: NextPage<HomeProps> = ({
       <Tabs articleTypeList={articleTypeList} activeId={activeId} />
       <Main className="flex items-start justify-between mt-[16px]">
         {/* 文章列表 */}
-        <div className="flex-1 pb-4  md:max-w-[700px] bg-[var(--primary-white)] transition-all duration-200">
+        <div className="flex-1 pb-4  md:max-w-[700px] min-h-[9999px] bg-[var(--primary-white)] transition-all duration-200">
           {/* 顶部分类栏 */}
           <ArticleTab articleTabList={articleTabList} />
           {/* 文章列表 */}
@@ -108,11 +108,11 @@ const Home: NextPage<HomeProps> = ({
         </div>
 
         {/* 广告栏 */}
-        <div className="hidden md:block w-[240px] h-[min-content]" ref={scrollRef}>
+        <div className={clsxm('hidden md:block w-[240px] h-[min-content]')} ref={scrollRef}>
           <div
             className={clsxm(
-              'duration-200 transition-all top-0',
-              show ? 'fixed translate-y-[5.133rem]' : 'static translate-y-[0]',
+              'transition-all',
+              show ? 'fixed translate-y-[5.133rem] duration-200 top-0' : 'static translate-y-[0]',
             )}>
             {advImageList.map((item) => (
               <AdvImage
@@ -135,7 +135,10 @@ const Home: NextPage<HomeProps> = ({
           </div>
 
           {/* 作者榜组件 */}
-          <AuthorList authorList={authorList} />
+          <AuthorList
+            className={clsxm(show ? 'opacity-0' : 'opacity-100', 'transition-all duration-200')}
+            authorList={authorList}
+          />
         </div>
       </Main>
     </Layout>
