@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getArticleDetails } from '@/api/article'
 import marked, { prism, resetTitle } from '@/utils/marked'
+import matter from 'gray-matter'
 import clsxm from '@/utils/clsxm'
 
 export interface ArticleProps {
@@ -201,7 +202,9 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const articleDetailsResponse = await getArticleDetails(articleId)
   const articleDetails = articleDetailsResponse.data
   resetTitle()
-  articleDetails.attributes.content = marked.parse(articleDetails.attributes.content)
+  articleDetails.attributes.content = marked.parse(
+    matter(articleDetails.attributes.content).content,
+  )
 
   // 顶部菜单
   const menusResponse = await getMenus()
