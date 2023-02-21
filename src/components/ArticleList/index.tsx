@@ -1,29 +1,37 @@
 import { getArticleList, SortType } from '@/api/home'
 import { useRouter } from 'next/router'
-import { FC, useEffect, useRef } from 'react'
+import { FC, useEffect, useMemo, useRef, useState } from 'react'
 import useSWR from 'swr'
 import ArticleItem from '../ArticleItem'
-import useNextPage from '@/hooks/useNextPage'
+import clsxm from '@/utils/clsxm'
+import styles from './index.module.scss'
 
 interface ArticlePageProps {
   pageNum: number
   sort: string
   category: string
+  observer?: IntersectionObserver
 }
 
-const ArticleListPage = ({ pageNum, sort, category }: ArticlePageProps) => {
-  const { data } = useSWR(
+const ArticleListPage = ({ pageNum, sort, category, observer }: ArticlePageProps) => {
+  const { data, isLoading } = useSWR(
     `/api/articles?page=${pageNum}&sort=${sort ? sort : ''}&type=${category}`,
     () => getArticleList(pageNum, sort as SortType, category as string),
   )
+
   const articleList = data?.data
+
+  if (!articleList?.length && observer && !isLoading) {
+    observer.unobserve(document.getElementById('page-end') as HTMLDivElement)
+    observer.disconnect()
+  }
 
   if (articleList?.length) {
     return (
       <>
         {articleList.map((item) => (
           <ArticleItem
-            key={item.id}
+            key={item.id + item.attributes.title}
             id={item.id}
             title={item.attributes.title}
             desc={item.attributes.desc}
@@ -38,32 +46,66 @@ const ArticleListPage = ({ pageNum, sort, category }: ArticlePageProps) => {
       </>
     )
   }
+  // 显示loading
+  if (isLoading) {
+    return (
+      <div className="w-full pt-4 px-[20px] h-[133px] cursor-pointer flex flex-col justify-around">
+        <div className={clsxm('h-[14px] bg-zinc-200 rounded-md w-[60%]', styles.loadingLine)}></div>
+        <div
+          className={clsxm('h-[14px] bg-zinc-200 rounded-md w-[100%]', styles.loadingLine)}></div>
+        <div className={clsxm('h-[14px] bg-zinc-200 rounded-md w-[80%]', styles.loadingLine)}></div>
+        <div className={clsxm('h-[14px] bg-zinc-200 rounded-md w-[40%]', styles.loadingLine)}></div>
+      </div>
+    )
+  }
 
   return null
 }
 
 const ArticleList: FC = () => {
   const router = useRouter()
-  const pages = useRef<JSX.Element[]>([])
-  const { pageNum } = useNextPage('#page-end')
+  const observer = useRef<IntersectionObserver>()
+  const [page, setPage] = useState(0)
+  const { sort, category } = router.query
+  const pages = useMemo(() => {
+    const temPage = []
+    for (let i = 1; i <= page; i++) {
+      temPage.push(
+        <ArticleListPage
+          observer={observer.current}
+          key={i}
+          pageNum={i}
+          sort={sort as string}
+          category={category as string}
+        />,
+      )
+    }
+    return temPage
+  }, [page, sort, category])
 
   useEffect(() => {
-    pages.current = []
-  }, [router, pageNum])
-
-  for (let i = 1; i <= pageNum; i++) {
-    pages.current.push(
-      <ArticleListPage
-        pageNum={i}
-        sort={router.query.sort as string}
-        category={router.query.category as string}
-        key={i}
-      />,
+    setPage(0)
+    observer.current = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setPage((page) => page + 1)
+        }
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1,
+      },
     )
-  }
+    observer.current.observe(document.getElementById('page-end') as HTMLDivElement)
+    return () => {
+      observer.current?.disconnect()
+    }
+  }, [sort, category])
+
   return (
     <>
-      {pages.current}
+      {pages}
       <div id="page-end"></div>
     </>
   )

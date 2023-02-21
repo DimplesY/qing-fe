@@ -48,14 +48,24 @@ const ArticleTab: FC<ArticleTabProps> = ({ articleTabList }) => {
           <li
             key={item.id}
             className="shrink-0 text-[1.17rem] px-[1.2rem] last:border-none border-r border-solid border-r-[hsla(0,0%,59.2%,.2)] text-[var(--tabs-color)]">
-            <Link
-              href={item.link}
-              className={clsxm(
-                'inline-block hover:text-[var(--tabs-active-color)]',
-                item.active && 'text-[var(--tabs-active-color)]',
-              )}>
-              {item.name}
-            </Link>
+            {item.active ? (
+              <span
+                className={clsxm(
+                  'inline-block hover:text-[var(--tabs-active-color)] cursor-pointer',
+                  item.active && 'text-[var(--tabs-active-color)]',
+                )}>
+                {item.name}
+              </span>
+            ) : (
+              <Link
+                href={item.link}
+                className={clsxm(
+                  'inline-block hover:text-[var(--tabs-active-color)]',
+                  item.active && 'text-[var(--tabs-active-color)]',
+                )}>
+                {item.name}
+              </Link>
+            )}
           </li>
         ))}
       </ul>
@@ -88,12 +98,11 @@ const Home: NextPage<HomeProps> = ({
     <Layout menus={menus} activeId={1}>
       <Seo />
       <Tabs articleTypeList={articleTypeList} activeId={activeId} />
-      <Main className="flex justify-between mt-[16px]">
+      <Main className="flex items-start justify-between mt-[16px]">
         {/* 文章列表 */}
         <div className="flex-1 pb-4  md:max-w-[700px] bg-[var(--primary-white)] transition-all duration-200">
           {/* 顶部分类栏 */}
           <ArticleTab articleTabList={articleTabList} />
-
           {/* 文章列表 */}
           <ArticleList />
         </div>

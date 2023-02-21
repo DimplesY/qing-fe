@@ -47,7 +47,11 @@ const Tabs: FC<TabsProps> = ({ articleTypeList, activeId }) => {
                 tab.id === activeId && 'text-[var(--tabs-active-color)]',
               )}
               key={tab.id}>
-              <Link href={tab.attributes.path || '/'}>{tab.attributes.name}</Link>
+              {tab.id === activeId ? (
+                tab.attributes.name
+              ) : (
+                <Link href={tab.attributes.path || '/'}>{tab.attributes.name}</Link>
+              )}
             </li>
           ))}
         </ul>

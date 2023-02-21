@@ -45,14 +45,14 @@ const ArticleItem: FC<ArticleItemProps> = (props) => {
         <div className="w-[1px] h-[14px] bg-[var(--article-split-line-color)] mx-[8px]"></div>
         <ul className="flex items-center">
           {props.articleTypes.map((item) => (
-            <Link key={item.id} href={item.attributes.path || '/'}>
-              <li className={styles.splitDot}>{item.attributes.name}</li>
+            <Link key={item.id} href={item.attributes.path || '/'} className={styles.splitDot}>
+              <li>{item.attributes.name}</li>
             </Link>
           ))}
         </ul>
       </div>
 
-      <Link href={'/article/' + props.id}>
+      <Link href={'/article/' + props.id} target="_blank">
         <div className="pb-4 mt-[10px] w-full border-b border-solid border-[var(--menu-split-line-color)] flex">
           <div className="w-full flex-1">
             <div

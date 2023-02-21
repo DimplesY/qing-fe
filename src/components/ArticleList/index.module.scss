@@ -1,0 +1,20 @@
+.loadingLine {
+  --juejin-layer-loading-start: #e4e6eb;
+  --juejin-layer-loading-end: rgba(228, 230, 235, 0.5);
+  background: linear-gradient(
+    90deg,
+    var(--juejin-layer-loading-start),
+    var(--juejin-layer-loading-end),
+    var(--juejin-layer-loading-start)
+  );
+  animation: loading 0.7s linear infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}

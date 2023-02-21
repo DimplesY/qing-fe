@@ -47,17 +47,34 @@ const MobileNav: FC<NavProps> = ({ menus, activeId }) => {
         )}>
         {menus.map((menu) => (
           <li key={menu.id} className="h-16 flex justify-center items-center text-[1.167rem]">
-            <Link
-              href={menu.attributes.path}
-              className={clsxm(
-                'inline-block h-20 mx-4 leading-[5rem] text-[var(--juejin-font-2)]',
-                activeId === menu.id &&
-                  'font-[500] text-[#1e80ff] hover:text-black dark:hover:text-white',
-                activeId !== menu.id && 'hover:text-black dark:hover:text-white',
-                styles.menuItem,
-              )}>
-              {menu.attributes.name}
-            </Link>
+            {/* 判断是否选中，并且判断是否为外部链接 */}
+            {menu.id === activeId ? (
+              <span
+                className={clsxm(
+                  'inline-block h-20 mx-4 leading-[5rem] text-[var(--juejin-font-2)] cursor-pointer font-[500] text-[#1e80ff] hover:text-black dark:hover:text-white',
+                  styles.menuItem,
+                )}>
+                {menu.attributes.name}
+              </span>
+            ) : menu.attributes.path.includes('https') ? (
+              <a
+                href={menu.attributes.path}
+                className={clsxm(
+                  'inline-block h-20 mx-4 leading-[5rem] text-[var(--juejin-font-2)] cursor-pointer font-[500] text-[#1e80ff] hover:text-black dark:hover:text-white',
+                  styles.menuItem,
+                )}>
+                {menu.attributes.name}
+              </a>
+            ) : (
+              <Link
+                href={menu.attributes.path}
+                className={clsxm(
+                  'inline-block h-20 mx-4 leading-[5rem] text-[var(--juejin-font-2)] hover:text-black dark:hover:text-white',
+                  styles.menuItem,
+                )}>
+                {menu.attributes.name}
+              </Link>
+            )}
           </li>
         ))}
       </ul>
@@ -79,7 +96,13 @@ const DesktopNav: FC<NavProps> = ({ menus, activeId }) => (
         )}
         key={menu.id}>
         {!!menu.attributes.badge?.trim() && <Badge title={menu.attributes.badge} />}
-        <Link href={menu.attributes.path}>{menu.attributes.name} </Link>
+        {menu.attributes.path.includes('https') ? (
+          <a href={menu.attributes.path} target="_blank" rel="noreferrer">
+            {menu.attributes.name}{' '}
+          </a>
+        ) : (
+          <Link href={menu.attributes.path}>{menu.attributes.name} </Link>
+        )}
       </li>
     ))}
   </ul>

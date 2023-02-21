@@ -18,13 +18,13 @@ marked.setOptions({
   // highlight(code, language) {
   //   return Prism.highlight(code, Prism.languages[language], language)
   // },
-  pedantic: false,
+  pedantic: true,
   headerIds: true,
   gfm: true,
   breaks: true,
-  sanitize: false,
+  sanitize: true,
   smartypants: true,
-  xhtml: false,
+  xhtml: true,
 })
 
 marked.use({
