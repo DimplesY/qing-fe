@@ -15,9 +15,10 @@ import { QrCode } from '@/components/QrCode'
 import AuthorList from '@/components/AuthorList'
 import Link from 'next/link'
 import clsxm from '@/utils/clsxm'
-import { FC, useMemo } from 'react'
+import { FC, useMemo, useRef } from 'react'
 import { useRouter } from 'next/router'
 import ArticleList from '@/components/ArticleList'
+import { useAdvShow } from '@/hooks/useAdvShow'
 
 interface ArticleTabProps {
   articleTabList: CommonData<ArticleTab>[]
@@ -80,6 +81,9 @@ const Home: NextPage<HomeProps> = ({
   authorList,
   articleTabList,
 }) => {
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const show = useAdvShow(scrollRef)
+
   return (
     <Layout menus={menus} activeId={1}>
       <Seo />
@@ -95,25 +99,31 @@ const Home: NextPage<HomeProps> = ({
         </div>
 
         {/* 广告栏 */}
-        <div className="hidden sm:block w-[240px]">
-          {advImageList.map((item) => (
-            <AdvImage
-              key={item.id}
-              img={process.env.NEXT_PUBLIC_API_URL + item.attributes.img.data.attributes.url}
-              advLink={item.attributes.advLink}
-              link={item.attributes.link}
-              alt={item.attributes.alt || '稀土掘金'}
-              className="w-[240px] h-[200px] overflow-hidden rounded-[2px] mb-[1.3rem]"
-            />
-          ))}
+        <div className="hidden sm:block w-[240px] h-[min-content]" ref={scrollRef}>
+          <div
+            className={clsxm(
+              'duration-200 transition-all top-0',
+              show ? 'fixed translate-y-[5.133rem]' : 'static translate-y-[0]',
+            )}>
+            {advImageList.map((item) => (
+              <AdvImage
+                key={item.id}
+                img={process.env.NEXT_PUBLIC_API_URL + item.attributes.img.data.attributes.url}
+                advLink={item.attributes.advLink}
+                link={item.attributes.link}
+                alt={item.attributes.alt || '稀土掘金'}
+                className="w-[240px] h-[200px] overflow-hidden rounded-[2px] mb-[1.3rem]"
+              />
+            ))}
 
-          {/* 二维码小组件 */}
-          <QrCode
-            img="/qrCode.png"
-            qrLink="/"
-            title="下载稀土掘金APP"
-            description="一个帮助开发者成长的社区"
-          />
+            {/* 二维码小组件 */}
+            <QrCode
+              img="/qrCode.png"
+              qrLink="/"
+              title="下载稀土掘金APP"
+              description="一个帮助开发者成长的社区"
+            />
+          </div>
 
           {/* 作者榜组件 */}
           <AuthorList authorList={authorList} />
