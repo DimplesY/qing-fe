@@ -156,7 +156,7 @@ div.code-toolbar > .toolbar span {
   color: var(--foreground);
   font-size: 0.8em;
   padding: 0.5em;
-  background: var(--comment);
+  // background: var(--comment);
   border-radius: 0.5em;
 }
 
@@ -166,9 +166,9 @@ div.code-toolbar > .toolbar button:hover,
 div.code-toolbar > .toolbar button:focus,
 div.code-toolbar > .toolbar span:hover,
 div.code-toolbar > .toolbar span:focus {
-  color: inherit;
+  // color: inherit;
   text-decoration: none;
-  background-color: var(--green);
+  // background-color: var(--green);
 }
 
 /* Remove text shadow for printing */

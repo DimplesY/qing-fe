@@ -6,7 +6,7 @@ import { FC, useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getArticleDetails } from '@/api/article'
-import marked from '@/utils/marked'
+import marked, { prism } from '@/utils/marked'
 
 export interface ArticleProps {
   articleDetails: CommonData<Article>
@@ -96,6 +96,7 @@ interface TocProps {
 const Article: NextPage<ArticleProps> = ({ articleDetails, menus, activeId }) => {
   const [toc, setToc] = useState<TocProps[]>([])
   useEffect(() => {
+    window.Prism = prism
     const tocList = Array.from(document.querySelectorAll('h1,h2')).map((item) => {
       return {
         content: item.textContent?.trim() + '',
@@ -112,7 +113,7 @@ const Article: NextPage<ArticleProps> = ({ articleDetails, menus, activeId }) =>
 
       {/* 格式化上下文 */}
       <div className="max-w-[1140px] mx-auto flow-root  pb-20">
-        <div className="flex justify-between mt-[16px]">
+        <div className="sm:flex sm:justify-between mt-[16px]">
           {/* 主体内容 */}
           <div className="flex-1 min-h-[100vh] sm:max-w-[820px] bg-[var(--primary-white)] transition-all duration-200">
             {/* 文章渲染 */}

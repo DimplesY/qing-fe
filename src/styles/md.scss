@@ -1,17 +1,45 @@
+html .prose {
+  --tw-prose-quotes: #666;
+  --tw-prose-quote-borders: #cbcbcb;
+  --tw-prose-quote-bg: #f8f8f8;
+}
+
+html.dark .prose {
+  --tw-prose-body: #a0aec0;
+  --tw-prose-headings: #cbcbcb;
+  --tw-prose-quotes: #a0aec0;
+  --tw-prose-quote-borders: #2d3748;
+  --tw-prose-quote-bg: #2d3748;
+}
+
 .prose {
   max-width: unset;
   font-size: 16px;
   @apply rounded-sm;
+  blockquote {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    border-left-width: 4px;
+    background-color: var(--tw-prose-quote-bg);
+    p {
+      &::after,
+      &::before {
+        content: '';
+      }
+    }
+  }
 }
 .prose p {
   line-height: inherit;
-  @apply py-[22px];
+  @apply py-[22px] my-0;
 }
 .prose h1 {
   @apply text-[24px] leading-[38px] mb-[5px] mt-[35px];
 }
 .prose pre {
-  @apply my-[35px] text-[12px] scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100;
+  min-width: 200px !important;
+  @apply w-full my-[35px] text-[12px] scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 relative;
 }
 
 .prose p code {
@@ -30,4 +58,15 @@
 }
 .prose pre code {
   @apply break-normal;
+}
+
+.prose pre .code-lang {
+  display: block;
+  position: absolute;
+  top: 0.9em;
+  right: 10px;
+  color: #fff;
+  z-index: 1;
+  cursor: pointer;
+  user-select: none;
 }
