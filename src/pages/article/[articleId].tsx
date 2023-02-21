@@ -4,17 +4,11 @@ import Layout from '@/layout/Layout'
 import Seo from '@/components/Seo'
 import { FC, MouseEvent, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import { getArticleDetails } from '@/api/article'
+import { getArticleDetails, getRecommendedList } from '@/api/article'
 import marked, { prism, resetTitle } from '@/utils/marked'
 import matter from 'gray-matter'
 import clsxm from '@/utils/clsxm'
 import RelatedList from '@/components/RelatedList'
-
-export interface ArticleProps {
-  articleDetails: CommonData<Article>
-  menus: CommonData<Menu>[]
-  activeId: number
-}
 
 interface AuthorProps {
   name: string
@@ -94,7 +88,19 @@ interface TocProps {
   level: number
 }
 
-const Article: NextPage<ArticleProps> = ({ articleDetails, menus, activeId }) => {
+export interface ArticleProps {
+  articleDetails: CommonData<Article>
+  menus: CommonData<Menu>[]
+  recommendedArticleList: CommonData<Article>[]
+  activeId: number
+}
+
+const Article: NextPage<ArticleProps> = ({
+  articleDetails,
+  menus,
+  activeId,
+  recommendedArticleList,
+}) => {
   const [toc, setToc] = useState<TocProps[]>([])
   const observer = useRef<IntersectionObserver | null>(null)
   const [currentId, setCurrentId] = useState<string>('heading-1')
@@ -162,7 +168,7 @@ const Article: NextPage<ArticleProps> = ({ articleDetails, menus, activeId }) =>
             />
 
             {/* 推荐文章 */}
-            <RelatedList />
+            <RelatedList recommendedArticleList={recommendedArticleList} />
 
             {/* 目录 */}
             <Directory tocList={toc} currentId={currentId} setCurrentId={setCurrentId} />
@@ -184,6 +190,10 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     matter(articleDetails.attributes.content).content,
   )
 
+  const articleTypeIdList = articleDetails.attributes.article_types.data.map((item) => item.id)
+  const recommendedResponse = await getRecommendedList(articleTypeIdList)
+  const recommendedArticleList = recommendedResponse.data
+
   // 顶部菜单
   const menusResponse = await getMenus()
   const menus = menusResponse.data
@@ -192,6 +202,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     props: {
       articleDetails,
       menus,
+      recommendedArticleList,
       activeId: 1,
     },
   }

@@ -23,6 +23,8 @@ interface ArticleItemProps {
   cover?: string
   // 发布时间
   publishedAt: string
+  // 标签类别
+  articleTypes: CommonData<ArticleType>[]
 }
 
 const ArticleItem: FC<ArticleItemProps> = (props) => {
@@ -42,8 +44,11 @@ const ArticleItem: FC<ArticleItemProps> = (props) => {
         <div>{time}前</div>
         <div className="w-[1px] h-[14px] bg-[var(--article-split-line-color)] mx-[8px]"></div>
         <ul className="flex items-center">
-          <li className={styles.splitDot}>前端</li>
-          <li className={styles.splitDot}>React.js</li>
+          {props.articleTypes.map((item) => (
+            <Link key={item.id} href={item.attributes.path || '/'}>
+              <li className={styles.splitDot}>{item.attributes.name}</li>
+            </Link>
+          ))}
         </ul>
       </div>
 

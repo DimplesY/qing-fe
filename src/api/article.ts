@@ -18,3 +18,16 @@ export function getTagLimit(tag: string | undefined) {
     method: 'GET',
   })
 }
+
+// 获取文章推荐列表
+export function getRecommendedList(typeIds: number[]) {
+  return request<CommResponse<Article>>({
+    url: 'api/articles',
+    method: 'GET',
+    params: {
+      'pagination[pageSize]': 5,
+      'filters[article_types][id][$in]': typeIds,
+      'filters[isRecommended]': true,
+    },
+  })
+}

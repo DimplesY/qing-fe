@@ -32,6 +32,7 @@ const ArticleListPage = ({ pageNum, sort, category }: ArticlePageProps) => {
             view={item.attributes.view}
             publishedAt={item.attributes.publishedAt}
             cover={item.attributes.cover.data?.attributes.url}
+            articleTypes={item.attributes.article_types.data}
           />
         ))}
       </>

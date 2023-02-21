@@ -90,7 +90,7 @@ const Home: NextPage<HomeProps> = ({
       <Tabs articleTypeList={articleTypeList} activeId={activeId} />
       <Main className="flex justify-between mt-[16px]">
         {/* 文章列表 */}
-        <div className="flex-1 pb-4  sm:max-w-[700px] bg-[var(--primary-white)] transition-all duration-200">
+        <div className="flex-1 pb-4  md:max-w-[700px] bg-[var(--primary-white)] transition-all duration-200">
           {/* 顶部分类栏 */}
           <ArticleTab articleTabList={articleTabList} />
 
@@ -99,7 +99,7 @@ const Home: NextPage<HomeProps> = ({
         </div>
 
         {/* 广告栏 */}
-        <div className="hidden sm:block w-[240px] h-[min-content]" ref={scrollRef}>
+        <div className="hidden md:block w-[240px] h-[min-content]" ref={scrollRef}>
           <div
             className={clsxm(
               'duration-200 transition-all top-0',
