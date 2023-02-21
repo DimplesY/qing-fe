@@ -3,39 +3,17 @@ import { getMenus } from '@/api/home'
 import Layout from '@/layout/Layout'
 import Seo from '@/components/Seo'
 import { FC, MouseEvent, useEffect, useRef, useState } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 import { getArticleDetails } from '@/api/article'
 import marked, { prism, resetTitle } from '@/utils/marked'
 import matter from 'gray-matter'
 import clsxm from '@/utils/clsxm'
+import RelatedList from '@/components/RelatedList'
 
 export interface ArticleProps {
   articleDetails: CommonData<Article>
   menus: CommonData<Menu>[]
   activeId: number
-}
-
-// 推荐文章列表
-const RelatedList: FC = () => {
-  return (
-    <div className="w-[300px] bg-[var(--primary-white)] px-[20px] pb-[15px] rounded-[4px] mt-[20px]">
-      <div className="h-[56px] leading-[56px] text-[16px] border-b-[1px] border-[#e4e6eb]">
-        相关文章
-      </div>
-      <ul>
-        <li className="py-[8px] w-[260px] text-[14px] leading-[22px] hover:text-[#1e80ff]">
-          <Link href="/">【一库】yalc: 可能是最好的前端link调试方案（已经非常谦虚了）</Link>
-        </li>
-        <li className="py-[8px] w-[260px] text-[14px] leading-[22px] hover:text-[#1e80ff]">
-          <Link href="/">【一库】yalc: 可能是最好的前端link调试方案（已经非常谦虚了）</Link>
-        </li>
-        <li className="py-[8px] w-[260px] text-[14px] leading-[22px] hover:text-[#1e80ff]">
-          <Link href="/">【一库】yalc: 可能是最好的前端link调试方案（已经非常谦虚了）</Link>
-        </li>
-      </ul>
-    </div>
-  )
 }
 
 interface AuthorProps {
@@ -214,6 +192,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     props: {
       articleDetails,
       menus,
+      activeId: 1,
     },
   }
 }
