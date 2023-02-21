@@ -14,6 +14,7 @@ html.dark .prose {
   --tw-prose-quote-bg: #2d3748;
   --tw-prose-links: #63b3ed;
   --tw-prose-links-hover: #4299e1;
+  --tw-prose-code: #cbd5e0;
 }
 
 .prose :where(a):not(:where([class~='not-prose'] *)) {
@@ -26,7 +27,7 @@ html.dark .prose {
 .prose {
   max-width: unset;
   font-size: 16px;
-  @apply rounded-sm;
+  @apply rounded-sm pb-16;
 
   blockquote {
     font-style: normal;
