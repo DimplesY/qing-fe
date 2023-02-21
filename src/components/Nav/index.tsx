@@ -11,6 +11,7 @@ import { BiCaretDown } from 'react-icons/bi'
 import { useClickAway } from 'ahooks'
 import { useTheme } from 'next-themes'
 import useLoaded from '@/hooks/useLoaded'
+import SmartLink from '../SmartLink'
 
 interface NavProps {
   menus: CommonData<Menu>[]
@@ -56,24 +57,15 @@ const MobileNav: FC<NavProps> = ({ menus, activeId }) => {
                 )}>
                 {menu.attributes.name}
               </span>
-            ) : menu.attributes.path.includes('https') ? (
-              <a
+            ) : (
+              <SmartLink
                 href={menu.attributes.path}
                 className={clsxm(
                   'inline-block h-20 mx-4 leading-[5rem] text-[var(--juejin-font-2)] cursor-pointer font-[500] text-[#1e80ff] hover:text-black dark:hover:text-white',
                   styles.menuItem,
                 )}>
                 {menu.attributes.name}
-              </a>
-            ) : (
-              <Link
-                href={menu.attributes.path}
-                className={clsxm(
-                  'inline-block h-20 mx-4 leading-[5rem] text-[var(--juejin-font-2)] hover:text-black dark:hover:text-white',
-                  styles.menuItem,
-                )}>
-                {menu.attributes.name}
-              </Link>
+              </SmartLink>
             )}
           </li>
         ))}
@@ -96,13 +88,7 @@ const DesktopNav: FC<NavProps> = ({ menus, activeId }) => (
         )}
         key={menu.id}>
         {!!menu.attributes.badge?.trim() && <Badge title={menu.attributes.badge} />}
-        {menu.attributes.path.includes('https') ? (
-          <a href={menu.attributes.path} target="_blank" rel="noreferrer">
-            {menu.attributes.name}{' '}
-          </a>
-        ) : (
-          <Link href={menu.attributes.path}>{menu.attributes.name} </Link>
-        )}
+        {<SmartLink href={menu.attributes.path}>{menu.attributes.name}</SmartLink>}
       </li>
     ))}
   </ul>

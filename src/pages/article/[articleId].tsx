@@ -9,7 +9,7 @@ import marked, { prism, resetTitle } from '@/utils/marked'
 import matter from 'gray-matter'
 import clsxm from '@/utils/clsxm'
 import RelatedList from '@/components/RelatedList'
-import { formatDate } from '@dimplesyj/util'
+import { formatDate, throttle } from '@dimplesyj/util'
 import { useAdvShow } from '@/hooks/useAdvShow'
 
 interface AuthorProps {
@@ -26,7 +26,7 @@ const AuthorCard: FC<AuthorProps> = ({ name, position, imageUrl }) => {
         src={process.env.NEXT_PUBLIC_API_URL + imageUrl}
         width={48}
         height={48}
-        alt="头像"
+        alt={name}
         className="w-[48px] h-[48px] rounded-full"
       />
       <div className="pl-[16px]">
@@ -48,7 +48,6 @@ const Directory: FC<DirectoryProps> = ({ tocList, currentId, setCurrentId }) => 
   // 点击目录
   function onLinkClick(e: MouseEvent, id: string) {
     e.preventDefault()
-    location.hash = id
     setCurrentId(id)
     window.scrollTo({
       top: document.getElementById(id)?.offsetTop || 0,
@@ -161,7 +160,6 @@ const Article: NextPage<ArticleProps> = ({
   recommendedArticleList,
 }) => {
   const [toc, setToc] = useState<TocProps[]>([])
-  const observer = useRef<IntersectionObserver | null>(null)
   const [currentId, setCurrentId] = useState<string>('heading-1')
   const scrollRef = useRef<HTMLDivElement>(null)
   const show = useAdvShow(scrollRef)
@@ -178,26 +176,33 @@ const Article: NextPage<ArticleProps> = ({
     setToc(tocList)
   }, [])
 
-  useEffect(() => {
-    observer.current = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        // 激活的id
-        setCurrentId(entries[0].target.id)
-      } else {
-        // 激活的id
-        if (toc.length) {
-          const index = toc.findIndex((item) => item.id === entries[0].target.id)
-          setCurrentId(toc[index + 1]?.id || entries[0].target.id)
-        }
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY + window.innerHeight / 2
+    let activeSection = null
+    for (let i = 0; i < toc.length; i++) {
+      const currentSection = document.getElementById(toc[i].id)
+      const nextSection = document.getElementById(toc[i + 1]?.id || '')
+      if (
+        currentSection &&
+        currentSection?.offsetTop <= scrollPosition &&
+        (!nextSection || nextSection.offsetTop > scrollPosition)
+      ) {
+        activeSection = toc[i]
       }
-    })
-    document.querySelectorAll('h1,h2').forEach((el) => {
-      observer.current && observer.current.observe(el)
-    })
-    return () => {
-      observer.current && observer.current.disconnect()
     }
-  }, [toc])
+    if (activeSection) {
+      setCurrentId(activeSection.id)
+    }
+  }
+
+  useEffect(() => {
+    const onScroll = throttle(200, handleScroll)
+
+    window.addEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+    }
+  })
 
   return (
     <Layout menus={menus} activeId={activeId}>
