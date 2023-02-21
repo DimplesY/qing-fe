@@ -2,11 +2,12 @@ import { GetServerSideProps, NextPage } from 'next'
 import { getMenus } from '@/api/home'
 import Layout from '@/layout/Layout'
 import Seo from '@/components/Seo'
-import { FC, useEffect, useState } from 'react'
+import { FC, MouseEvent, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getArticleDetails } from '@/api/article'
-import marked, { prism } from '@/utils/marked'
+import marked, { prism, resetTitle } from '@/utils/marked'
+import clsxm from '@/utils/clsxm'
 
 export interface ArticleProps {
   articleDetails: CommonData<Article>
@@ -63,10 +64,22 @@ const AuthorCard: FC<AuthorProps> = ({ name, position, imageUrl }) => {
 
 interface DirectoryProps {
   tocList: TocProps[]
+  currentId: string
+  setCurrentId: (id: string) => void
 }
 
 // 目录
-const Directory: FC<DirectoryProps> = ({ tocList }) => {
+const Directory: FC<DirectoryProps> = ({ tocList, currentId, setCurrentId }) => {
+  // 点击目录
+  function onLinkClick(e: MouseEvent, id: string) {
+    e.preventDefault()
+    location.hash = id
+    setCurrentId(id)
+    window.scrollTo({
+      top: document.getElementById(id)?.offsetTop || 0,
+    })
+  }
+
   return (
     <div className="w-[300px] bg-[var(--primary-white)] px-[20px] pb-[15px] rounded-[4px] mt-[20px]">
       <div className="h-[56px] leading-[56px] text-[16px] border-b-[1px] border-[#e4e6eb]">
@@ -76,8 +89,17 @@ const Directory: FC<DirectoryProps> = ({ tocList }) => {
         {tocList.map((item) => (
           <li
             key={item.id}
-            className="py-[8px] w-[260px] text-[14px] leading-[22px] hover:text-[#1e80ff] truncate">
-            <a rel="noopener noreferrer" href={'#' + item.id}>
+            className={clsxm(
+              'py-[8px] w-[260px] text-[14px] leading-[22px] hover:text-[#1e80ff] truncate',
+              currentId === item.id && 'text-[#1e80ff]',
+              item.level === 2 && 'pl-[16px]',
+            )}>
+            <a
+              rel="noopener noreferrer"
+              href={'#' + item.id}
+              onClick={(e) => {
+                onLinkClick(e, item.id)
+              }}>
               {item.content}
             </a>
           </li>
@@ -95,6 +117,9 @@ interface TocProps {
 
 const Article: NextPage<ArticleProps> = ({ articleDetails, menus, activeId }) => {
   const [toc, setToc] = useState<TocProps[]>([])
+  const observer = useRef<IntersectionObserver | null>(null)
+  const [currentId, setCurrentId] = useState<string>('heading-1')
+
   useEffect(() => {
     window.Prism = prism
     const tocList = Array.from(document.querySelectorAll('h1,h2')).map((item) => {
@@ -106,6 +131,29 @@ const Article: NextPage<ArticleProps> = ({ articleDetails, menus, activeId }) =>
     })
     setToc(tocList)
   }, [])
+
+  useEffect(() => {
+    observer.current = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        // 激活的id
+        setCurrentId(entries[0].target.id)
+      } else {
+        // 激活的id
+        if (toc.length) {
+          const index = toc.findIndex((item) => item.id === entries[0].target.id)
+          setCurrentId(toc[index + 1]?.id || entries[0].target.id)
+        }
+      }
+    })
+
+    document.querySelectorAll('h1,h2').forEach((el) => {
+      observer.current && observer.current.observe(el)
+    })
+
+    return () => {
+      observer.current && observer.current.disconnect()
+    }
+  }, [toc])
 
   return (
     <Layout menus={menus} activeId={activeId}>
@@ -138,7 +186,7 @@ const Article: NextPage<ArticleProps> = ({ articleDetails, menus, activeId }) =>
             <RelatedList />
 
             {/* 目录 */}
-            <Directory tocList={toc} />
+            <Directory tocList={toc} currentId={currentId} setCurrentId={setCurrentId} />
           </div>
         </div>
       </div>
@@ -152,6 +200,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   // 文章详情数据
   const articleDetailsResponse = await getArticleDetails(articleId)
   const articleDetails = articleDetailsResponse.data
+  resetTitle()
   articleDetails.attributes.content = marked.parse(articleDetails.attributes.content)
 
   // 顶部菜单

@@ -2,6 +2,8 @@ html .prose {
   --tw-prose-quotes: #666;
   --tw-prose-quote-borders: #cbcbcb;
   --tw-prose-quote-bg: #f8f8f8;
+  --tw-prose-links: #4299e1;
+  --tw-prose-links-hover: #63b3ed;
 }
 
 html.dark .prose {
@@ -10,12 +12,22 @@ html.dark .prose {
   --tw-prose-quotes: #a0aec0;
   --tw-prose-quote-borders: #2d3748;
   --tw-prose-quote-bg: #2d3748;
+  --tw-prose-links: #63b3ed;
+  --tw-prose-links-hover: #4299e1;
+}
+
+.prose :where(a):not(:where([class~='not-prose'] *)) {
+  @apply no-underline;
+  &:hover {
+    @apply text-blue-600 duration-200  underline;
+  }
 }
 
 .prose {
   max-width: unset;
   font-size: 16px;
   @apply rounded-sm;
+
   blockquote {
     font-style: normal;
     font-weight: normal;
@@ -30,9 +42,10 @@ html.dark .prose {
     }
   }
 }
+
 .prose p {
   line-height: inherit;
-  @apply py-[22px] my-0;
+  @apply py-[11px] my-0;
 }
 .prose h1 {
   @apply text-[24px] leading-[38px] mb-[5px] mt-[35px];
