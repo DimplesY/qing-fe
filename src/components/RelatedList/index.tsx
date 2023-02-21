@@ -9,14 +9,14 @@ interface RelatedListProps {
 const RelatedList: FC<RelatedListProps> = ({ recommendedArticleList }) => {
   return (
     <div className="w-[300px] bg-[var(--primary-white)] px-[20px] pb-[15px] rounded-[4px] mt-[20px]">
-      <div className="h-[56px] leading-[56px] text-[16px] border-b-[1px] border-[#e4e6eb]">
+      <div className="h-[56px] leading-[56px] text-[16px] border-b-[1px] border-[var(--menu-split-line-color)] text-[var(--article-title-color)]">
         相关文章
       </div>
       <ul>
         {recommendedArticleList.map((item) => (
           <li
             key={item.id}
-            className="py-[8px] w-[260px] text-[14px] leading-[22px] hover:text-[#1e80ff]">
+            className="py-[8px] w-[260px] text-[14px] leading-[22px] hover:text-[#1e80ff] text-[var(--aside-text-color)]">
             <Link href={'/article/' + item.id}>{item.attributes.title}</Link>
           </li>
         ))}
