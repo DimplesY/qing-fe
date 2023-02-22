@@ -15,7 +15,7 @@ interface qrCodeProps {
 export const QrCode: FC<qrCodeProps> = ({ img, qrLink, title, description }) => {
   return (
     <Link href={qrLink} title={title}>
-      <div className="flex w-[240px] h-[74px] p-[13px] m-auto mt-[16px] bg-white bg-[var(--primary-white)] rounded-[2px]">
+      <div className="flex w-[240px] h-[74px] p-[13px] m-auto mt-[16px] bg-[var(--primary-white)] rounded-[2px]">
         <Image
           src={img}
           priority
