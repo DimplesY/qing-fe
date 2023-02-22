@@ -176,33 +176,31 @@ const Article: NextPage<ArticleProps> = ({
     setToc(tocList)
   }, [])
 
-  const handleScroll = () => {
-    const scrollPosition = window.scrollY + window.innerHeight / 2
-    let activeSection = null
-    for (let i = 0; i < toc.length; i++) {
-      const currentSection = document.getElementById(toc[i].id)
-      const nextSection = document.getElementById(toc[i + 1]?.id || '')
-      if (
-        currentSection &&
-        currentSection?.offsetTop <= scrollPosition &&
-        (!nextSection || nextSection.offsetTop > scrollPosition)
-      ) {
-        activeSection = toc[i]
-      }
-    }
-    if (activeSection) {
-      setCurrentId(activeSection.id)
-    }
-  }
-
   useEffect(() => {
-    const onScroll = throttle(200, handleScroll)
+    const onScroll = throttle(200, () => {
+      const scrollPosition = window.scrollY + window.innerHeight / 2
+      let activeSection = null
+      for (let i = 0; i < toc.length; i++) {
+        const currentSection = document.getElementById(toc[i].id)
+        const nextSection = document.getElementById(toc[i + 1]?.id || '')
+        if (
+          currentSection &&
+          currentSection?.offsetTop <= scrollPosition &&
+          (!nextSection || nextSection.offsetTop > scrollPosition)
+        ) {
+          activeSection = toc[i]
+        }
+      }
+      if (activeSection) {
+        setCurrentId(activeSection.id)
+      }
+    })
 
     window.addEventListener('scroll', onScroll)
     return () => {
       window.removeEventListener('scroll', onScroll)
     }
-  })
+  }, [toc])
 
   return (
     <Layout menus={menus} activeId={activeId}>
