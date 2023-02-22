@@ -1,7 +1,7 @@
 <p ><h1 align="center"> Qing-Fe </h1></p>
 
 <p>
-<h3 height="200px" align="center">《基于 Next.js 的仿掘金项目— 字节跳动青训营》<img src="https://cdn.jsdelivr.net/gh/MaleWeb/picture/images/techblog/hi.gif" width="25"></h3>
+<h3 height="200px" align="center">《基于 Next.js 的仿掘金项目》— 字节跳动青训营<img src="https://cdn.jsdelivr.net/gh/MaleWeb/picture/images/techblog/hi.gif" width="25"></h3>
 </p>
 
 ## 技术栈
