@@ -47,8 +47,11 @@ const MobileNav: FC<NavProps> = ({ menus, activeId }) => {
           !showMenu && 'hidden',
         )}>
         {menus.map((menu) => (
-          <li key={menu.id} className="h-16 flex justify-center items-center text-[1.167rem]">
+          <li
+            key={menu.id}
+            className="h-16 flex justify-center items-center text-[1.167rem] relative">
             {/* 判断是否选中，并且判断是否为外部链接 */}
+            {!!menu.attributes.badge?.trim() && <Badge title={menu.attributes.badge} />}
             {menu.id === activeId ? (
               <span
                 className={clsxm(
