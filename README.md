@@ -4,7 +4,12 @@
 <h3 height="200px" align="center">《基于 Next.js 的仿掘金项目》— 字节跳动青训营<img src="https://cdn.jsdelivr.net/gh/MaleWeb/picture/images/techblog/hi.gif" width="25"></h3>
 </p>
 
-## 技术栈
+<p align="center">
+ 🧑‍💻👩‍💻👨‍💻
+</p>
+
+
+## 🚀 Tech Stack
 - 使用 TypeScript + Next.js 进行开发 
 - 使用 eslint、prettier统一代码规范 
 - 使用 lint-staged、配合 husky 接管 git hook 检查暂存区代码
@@ -20,5 +25,13 @@ pnpm i
 pnpm dev
 ```
 
+## 提交
+
+```bash
+git add .
+pnpm commit
+```
 
 
+## 贡献者
+<a href="https://github.com/DimplesY/qing-fe/graphs/contributors"><img src="https://github.com/DimplesY/qing-fe/blob/main/CONTRIBUTORS.svg" /></a>
