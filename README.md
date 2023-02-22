@@ -32,6 +32,5 @@ git add .
 pnpm commit
 ```
 
-
 ## 🧑‍💻 Contribution
 <a href="https://github.com/DimplesY/qing-fe/graphs/contributors"><img src="https://github.com/DimplesY/qing-fe/blob/main/CONTRIBUTORS.svg" /></a>
