@@ -18,14 +18,14 @@
 
 
 
-## 开发
+## 🦄 开发
 
 ```bash
 pnpm i
 pnpm dev
 ```
 
-## 提交
+## 📝 提交
 
 ```bash
 git add .
@@ -33,5 +33,5 @@ pnpm commit
 ```
 
 
-## 贡献者
+## 🧑‍💻 Contribution
 <a href="https://github.com/DimplesY/qing-fe/graphs/contributors"><img src="https://github.com/DimplesY/qing-fe/blob/main/CONTRIBUTORS.svg" /></a>
