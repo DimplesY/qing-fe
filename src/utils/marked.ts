@@ -18,7 +18,7 @@ marked.setOptions({
   // highlight(code, language) {
   //   return Prism.highlight(code, Prism.languages[language], language)
   // },
-  pedantic: true,
+  pedantic: false,
   headerIds: true,
   gfm: true,
   breaks: true,
