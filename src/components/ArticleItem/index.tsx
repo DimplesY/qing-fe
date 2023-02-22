@@ -37,7 +37,7 @@ const ArticleItem: FC<ArticleItemProps> = (props) => {
     .replace(/second(s)?/g, '秒')
 
   return (
-    <div className="w-full pt-4 px-[20px] cursor-pointer">
+    <div className="w-full pt-4 px-[10px] sm:px-[20px] cursor-pointer">
       <div className="flex items-center text-[13px] leading-[22px] whitespace-nowrap break-all text-[var(--tabs-color)]">
         <div className="text-[var(--article-title-color)] truncate">{props.author}</div>
         <div className="w-[1px] h-[14px] bg-[var(--article-split-line-color)] mx-[8px]"></div>
@@ -53,7 +53,7 @@ const ArticleItem: FC<ArticleItemProps> = (props) => {
       </div>
 
       <Link href={'/article/' + props.id} target="_blank">
-        <div className="pb-4 mt-[10px] w-full border-b border-solid border-[var(--menu-split-line-color)] flex">
+        <div className="pb-4 mt-[10px] w-full box-border border-b border-solid border-[var(--menu-split-line-color)] flex">
           <div className="w-full flex-1">
             <div
               className={clsxm(
