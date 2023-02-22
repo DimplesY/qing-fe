@@ -128,7 +128,7 @@ const Home: NextPage<HomeProps> = ({
             {/* 二维码小组件 */}
             <QrCode
               img="/qrCode.png"
-              qrLink="/"
+              qrLink="https://juejin.cn/app"
               title="下载稀土掘金APP"
               description="一个帮助开发者成长的社区"
             />
