@@ -2,7 +2,7 @@ import { GetServerSideProps, NextPage } from 'next'
 import { getMenus } from '@/api/home'
 import Layout from '@/layout/Layout'
 import Seo from '@/components/Seo'
-import { FC, MouseEvent, useEffect, useRef, useState } from 'react'
+import { FC, MouseEvent, useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
 import { getArticleDetails, getRecommendedList } from '@/api/article'
 import marked, { prism, resetTitle } from '@/utils/marked'
@@ -164,6 +164,12 @@ const Article: NextPage<ArticleProps> = ({
   const scrollRef = useRef<HTMLDivElement>(null)
   const show = useAdvShow(scrollRef)
 
+  const keywords = useMemo(
+    () =>
+      articleDetails.attributes.article_types.data.map((item) => item.attributes.name).join(','),
+    [articleDetails],
+  )
+
   useEffect(() => {
     window.Prism = prism
     const tocList = Array.from(document.querySelectorAll('h1,h2')).map((item) => {
@@ -204,7 +210,11 @@ const Article: NextPage<ArticleProps> = ({
 
   return (
     <Layout menus={menus} activeId={activeId}>
-      <Seo />
+      <Seo
+        title={articleDetails.attributes.title}
+        description={articleDetails.attributes.desc}
+        keywords={keywords}
+      />
 
       {/* 格式化上下文 */}
       <div className="max-w-[1140px] mx-auto flow-root  pb-20">
