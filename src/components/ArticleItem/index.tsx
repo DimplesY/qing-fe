@@ -45,11 +45,8 @@ const ArticleItem: FC<ArticleItemProps> = (props) => {
         <div className="w-[1px] h-[14px] bg-[var(--article-split-line-color)] mx-[8px]"></div>
         <ul className="flex items-center">
           {props.articleTypes.map((item) => (
-            <li key={item.id}>
-              <Link
-                title={item.attributes.name}
-                href={item.attributes.path || '/'}
-                className={styles.splitDot}>
+            <li key={item.id} className={styles.splitDot}>
+              <Link title={item.attributes.name} href={item.attributes.path || '/'}>
                 {item.attributes.name}
               </Link>
             </li>
