@@ -15,6 +15,7 @@ html.dark .prose {
   --tw-prose-links: #63b3ed;
   --tw-prose-links-hover: #4299e1;
   --tw-prose-code: #cbd5e0;
+  --tw-prose-bold: #cbd5e0;
 }
 
 .prose :where(a):not(:where([class~='not-prose'] *)) {
