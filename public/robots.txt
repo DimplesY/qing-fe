@@ -1,0 +1,28 @@
+User-agent: *
+
+Disallow: /subscribe/subscribed
+Disallow: /user/settings
+Disallow: /drafts
+Disallow: /news-drafts
+Disallow: /editor
+Disallow: /oauth-result
+Disallow: /search
+Disallow: /equation
+Disallow: /book/order
+Disallow: /books/payment
+Disallow: /appview
+Disallow: /creator
+Disallow: /notification
+Disallow: /translate
+Disallow: /zhuanlan
+
+Sitemap: https://juejin.cn/sitemap/posts/index.xml
+Sitemap: https://juejin.cn/sitemap/user/index.xml
+Sitemap: https://juejin.cn/sitemap/news/index.xml
+Sitemap: https://juejin.cn/sitemap/columns/index.xml
+Sitemap: https://juejin.cn/sitemap/tag/index.xml
+Sitemap: https://juejin.cn/sitemap/pin/index.xml
+Sitemap: https://juejin.cn/sitemap/collections/index.xml
+Sitemap: https://juejin.cn/sitemap/keywords/index.xml
+Sitemap: https://juejin.cn/sitemap/user_posts/index.xml
+Sitemap: https://juejin.cn/sitemap/user_pins/index.xml

@@ -31,7 +31,7 @@ export const AdvImage: FC<AdvImageProps> = ({ className, img, link, advLink, alt
           />
 
           {/* 广告图片 */}
-          <Link href={link} className="w-full h-full block">
+          <Link href={link} title={alt} className="w-full h-full block">
             <Image
               src={img}
               priority
@@ -43,7 +43,7 @@ export const AdvImage: FC<AdvImageProps> = ({ className, img, link, advLink, alt
           </Link>
 
           <div className="px-[15px] leading-[36px] box-content rounded-[6px] border border-white border-solid text-[20px] text-white absolute bottom-[10px] right-[10px] font-[300] bg-[rgba(0,0,0,.2)] hover:bg-[rgba(0,0,0,.4)] scale-50 origin-bottom-right group">
-            <Link href={advLink} className="flex">
+            <Link href={advLink} title="广告投放" className="flex">
               <span className="hidden group-hover:block">投放</span>
               <span>广告</span>
             </Link>

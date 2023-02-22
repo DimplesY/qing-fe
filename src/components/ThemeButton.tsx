@@ -17,6 +17,8 @@ const ThemeButton = ({ className, ...rest }: ThemeButtonProps) => {
 
   return (
     <button
+      name="theme"
+      aria-label="主题切换"
       ref={themeRef}
       className={clsxm(className)}
       {...rest}

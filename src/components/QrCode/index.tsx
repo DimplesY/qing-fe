@@ -14,9 +14,16 @@ interface qrCodeProps {
 
 export const QrCode: FC<qrCodeProps> = ({ img, qrLink, title, description }) => {
   return (
-    <Link href={qrLink}>
+    <Link href={qrLink} title={title}>
       <div className="flex w-[240px] h-[74px] p-[13px] m-auto mt-[16px] bg-white bg-[var(--primary-white)] rounded-[2px]">
-        <Image src={img} priority width={50} height={50} alt="二维码" />
+        <Image
+          src={img}
+          priority
+          width={50}
+          height={50}
+          alt="二维码"
+          className="w-[50px] h-[50px]"
+        />
 
         <div className="ml-[16px] ">
           <div className="text-[14px] font-[500]">{title}</div>

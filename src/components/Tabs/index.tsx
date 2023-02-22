@@ -50,7 +50,9 @@ const Tabs: FC<TabsProps> = ({ articleTypeList, activeId }) => {
               {tab.id === activeId ? (
                 tab.attributes.name
               ) : (
-                <Link href={tab.attributes.path || '/'}>{tab.attributes.name}</Link>
+                <Link href={tab.attributes.path || '/'} title={tab.attributes.name}>
+                  {tab.attributes.name}
+                </Link>
               )}
             </li>
           ))}

@@ -22,7 +22,7 @@ interface AuthorInfo {
 
 export const Author: FC<AuthorInfo> = ({ name, path, imageUrl, gradeUrl, position }) => {
   return (
-    <Link href={path}>
+    <Link href={path} title={name}>
       <div className="flex w-[240px] h-[70px] px-[16px] items-center">
         <Image
           src={imageUrl}

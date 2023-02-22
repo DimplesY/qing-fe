@@ -24,10 +24,12 @@ const Seo: React.FC<SeoProps> = (props) => {
       <meta name="keywords" content={meta.keywords} />
       <meta
         name="viewport"
-        content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover"
+        content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover"
       />
       <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
       <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
+      <link rel="preconnect" href={process.env.NEXT_PUBLIC_API_URL} />
+      <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_API_URL} />
       {meta.children}
     </Head>
   )

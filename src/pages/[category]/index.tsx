@@ -59,6 +59,7 @@ const ArticleTab: FC<ArticleTabProps> = ({ articleTabList }) => {
             ) : (
               <Link
                 href={item.link}
+                title={item.name}
                 className={clsxm(
                   'inline-block hover:text-[var(--tabs-active-color)]',
                   item.active && 'text-[var(--tabs-active-color)]',

@@ -45,14 +45,19 @@ const ArticleItem: FC<ArticleItemProps> = (props) => {
         <div className="w-[1px] h-[14px] bg-[var(--article-split-line-color)] mx-[8px]"></div>
         <ul className="flex items-center">
           {props.articleTypes.map((item) => (
-            <Link key={item.id} href={item.attributes.path || '/'} className={styles.splitDot}>
-              <li>{item.attributes.name}</li>
-            </Link>
+            <li key={item.id}>
+              <Link
+                title={item.attributes.name}
+                href={item.attributes.path || '/'}
+                className={styles.splitDot}>
+                {item.attributes.name}
+              </Link>
+            </li>
           ))}
         </ul>
       </div>
 
-      <Link href={'/article/' + props.id} target="_blank">
+      <Link href={'/article/' + props.id} title={props.title} target="_blank">
         <div className="pb-4 mt-[10px] w-full box-border border-b border-solid border-[var(--menu-split-line-color)] flex">
           <div className="w-full flex-1">
             <div
@@ -84,7 +89,8 @@ const ArticleItem: FC<ArticleItemProps> = (props) => {
             <Image
               width={120}
               height={80}
-              className="w-[120px] h-[80px] rounded-[2px] bg-white ml-8"
+              priority
+              className="w-[120px] h-[80px] rounded-[2px] bg-white ml-8 object-cover"
               alt="稀土掘金"
               src={process.env.NEXT_PUBLIC_API_URL + props.cover}
             />

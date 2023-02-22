@@ -107,7 +107,7 @@ const Nav: FC<NavProps> = (props) => {
   return (
     <header className={clsxm(styles.header, show ? styles.visible : styles.show)}>
       <nav id="header" className={clsxm(styles.nav)}>
-        <Link href="/">
+        <Link href="/" title="稀土掘金">
           {/* PC 端 LOGO light */}
           <Image
             src={isDark() ? '/logo_dark.svg' : '/logo.svg'}

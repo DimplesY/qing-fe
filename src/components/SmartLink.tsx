@@ -7,7 +7,11 @@ interface SmartLinkProps extends LinkProps {
 
 export default function SmartLink({ children, ...rest }: SmartLinkProps) {
   return /http/.test(`${rest.href}`) ? (
-    <a href={rest.href as string} target="_blank" rel="noopener noreferrer">
+    <a
+      href={rest.href as string}
+      title={rest.href as string}
+      target="_blank"
+      rel="noopener noreferrer">
       {children}
     </a>
   ) : (
