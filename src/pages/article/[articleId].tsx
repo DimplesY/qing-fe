@@ -109,7 +109,7 @@ const ArticleContent: FC<articleContentProps> = ({
   view,
 }) => {
   return (
-    <div className="flex-1 min-h-[100vh] sm:max-w-[820px] bg-[var(--primary-white)] transition-all duration-200">
+    <div className="flex-1 min-h-[100vh] sm:max-w-[820px] bg-[var(--primary-white)] transition-all flow-root duration-200">
       {/* 文章标题 */}
       <div className="text-[2.66rem] font-[900] mx-[2.66rem] mt-[2.66rem] text-[var(--tw-prose-headings)]">
         {title}
@@ -211,7 +211,7 @@ const Article: NextPage<ArticleProps> = ({
   }, [toc])
 
   return (
-    <Layout menus={menus} activeId={activeId}>
+    <Layout menus={menus} activeId={activeId} classNames="mt-[calc(4.33rem+1px)]">
       <Seo
         title={articleDetails.attributes.title}
         description={articleDetails.attributes.desc}
@@ -219,8 +219,8 @@ const Article: NextPage<ArticleProps> = ({
       />
 
       {/* 格式化上下文 */}
-      <div className="max-w-[1140px] mx-auto flow-root  pb-20">
-        <div className="sm:flex sm:justify-between mt-[16px]">
+      <div className="max-w-[1140px] mx-auto  pb-20">
+        <div className="sm:flex sm:justify-between sm:mt-[16px] pt-[16px]">
           {/* 主体内容 */}
           <ArticleContent
             name={articleDetails.attributes.author.data.attributes.name}

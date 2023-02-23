@@ -96,7 +96,7 @@ const Home: NextPage<HomeProps> = ({
   const show = useAdvShow(scrollRef)
 
   return (
-    <Layout menus={menus} activeId={1}>
+    <Layout menus={menus} activeId={1} classNames="mt-[calc(4.33rem+1px)] sm:mt-[calc(5rem+1px)]">
       <Seo />
       <Tabs articleTypeList={articleTypeList} activeId={activeId} />
       <Main className="flex items-start justify-between mt-[16px]">
