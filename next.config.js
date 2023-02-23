@@ -23,6 +23,11 @@ const nextConfig = {
         port: '1337',
         pathname: '/uploads/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'dimples-yanjie.oss-cn-beijing.aliyuncs.com',
+        pathname: '/**',
+      },
     ],
   },
   redirects() {

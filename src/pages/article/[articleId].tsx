@@ -12,6 +12,8 @@ import RelatedList from '@/components/RelatedList'
 import { formatDate, throttle } from '@dimplesyj/util'
 import { useAdvShow } from '@/hooks/useAdvShow'
 import { useRouter } from 'next/router'
+import { createPortal } from 'react-dom'
+import ImagePreview from '@/components/ImagePreview'
 
 interface AuthorProps {
   name: string
@@ -108,6 +110,26 @@ const ArticleContent: FC<articleContentProps> = ({
   createdAt,
   view,
 }) => {
+  const [show, setShow] = useState(false)
+  const [alt, setAlt] = useState('')
+  const [src, setSrc] = useState('')
+  const [imageProps, setImageProps] = useState({ width: 0, height: 0 })
+  const onArticleClick = (e: MouseEvent) => {
+    if ((e.target as HTMLElement).tagName === 'IMG') {
+      const image = new window.Image()
+      setShow(true)
+      image.onload = () => {
+        setAlt((e.target as HTMLImageElement).alt)
+        setSrc((e.target as HTMLImageElement).src)
+        setImageProps({
+          width: (e.target as HTMLImageElement).width,
+          height: (e.target as HTMLImageElement).height,
+        })
+      }
+      image.src = (e.target as HTMLImageElement).src
+    }
+  }
+
   return (
     <div className="flex-1 min-h-[100vh] sm:max-w-[820px] bg-[var(--primary-white)] transition-all flow-root duration-200">
       {/* 文章标题 */}
@@ -134,9 +156,21 @@ const ArticleContent: FC<articleContentProps> = ({
 
       {/* 文章主体渲染 */}
       <article
+        onClick={onArticleClick}
         dangerouslySetInnerHTML={{ __html: content }}
         className="prose pt-[2.667rem] px-[2.67rem] relative z-10"
       />
+
+      {show &&
+        createPortal(
+          <ImagePreview
+            src={src}
+            alt={alt}
+            imageProps={imageProps}
+            onClose={() => setShow(false)}
+          />,
+          document.body,
+        )}
     </div>
   )
 }
