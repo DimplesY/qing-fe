@@ -11,6 +11,7 @@ import clsxm from '@/utils/clsxm'
 import RelatedList from '@/components/RelatedList'
 import { formatDate, throttle } from '@dimplesyj/util'
 import { useAdvShow } from '@/hooks/useAdvShow'
+import { useRouter } from 'next/router'
 
 interface AuthorProps {
   name: string
@@ -163,6 +164,7 @@ const Article: NextPage<ArticleProps> = ({
   const [currentId, setCurrentId] = useState<string>('heading-1')
   const scrollRef = useRef<HTMLDivElement>(null)
   const show = useAdvShow(scrollRef)
+  const router = useRouter()
 
   const keywords = useMemo(
     () =>
@@ -180,7 +182,7 @@ const Article: NextPage<ArticleProps> = ({
       }
     })
     setToc(tocList)
-  }, [])
+  }, [router])
 
   useEffect(() => {
     const onScroll = throttle(200, () => {
