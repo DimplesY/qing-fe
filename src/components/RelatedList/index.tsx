@@ -17,7 +17,7 @@ const RelatedList: FC<RelatedListProps> = ({ recommendedArticleList }) => {
           <li
             key={item.id}
             className="py-[8px] w-[260px] text-[14px] leading-[22px] hover:text-[#1e80ff] text-[var(--aside-text-color)]">
-            <Link href={'/article/' + item.id} title={item.attributes.title}>
+            <Link href={'/article/' + item.id} title={item.attributes.title} target="_blank">
               {item.attributes.title}
             </Link>
           </li>
